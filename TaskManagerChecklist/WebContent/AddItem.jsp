@@ -93,7 +93,7 @@
 										
 									</td>
 									<td>
-										<input type="submit" name="addmore" value="Add More"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="done" value="Done"/>
+										<input type="submit" id="button1" name="addmore" value="Add More"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" id="button1" name="done" value="Done"/>
 									</td>
 								</tr>
 							</table>

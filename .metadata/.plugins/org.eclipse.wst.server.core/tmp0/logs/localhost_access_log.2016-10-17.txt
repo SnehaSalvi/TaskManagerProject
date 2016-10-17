@@ -7,3 +7,11 @@
 0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /TaskManagerChecklist/images/list.png HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /TaskManagerChecklist/images/menu.jpg HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /favicon.ico HTTP/1.1" 404 973
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:15:53 +0530] "GET /TaskManagerChecklist/AddItem.jsp HTTP/1.1" 200 2892
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:15:53 +0530] "GET /TaskManagerChecklist/item.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:16:49 +0530] "GET /TaskManagerChecklist/AddItem.jsp HTTP/1.1" 200 2918
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:16:49 +0530] "GET /TaskManagerChecklist/home.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:16:49 +0530] "GET /TaskManagerChecklist/item.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:16:49 +0530] "GET /TaskManagerChecklist/images/banner.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:16:49 +0530] "GET /TaskManagerChecklist/images/menu.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:16:49 +0530] "GET /TaskManagerChecklist/images/list.png HTTP/1.1" 304 -
