@@ -62,7 +62,7 @@
 							<table align="center" cellspacing="6" cellpadding="4">
 								<tr>
 									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Add Task" required="required"/>
+										<input type="label" id="font1" name="label" value="Task" required="required"/>
 									</td>
 								</tr>
 								<tr>

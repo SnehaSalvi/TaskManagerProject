@@ -1,0 +1,9 @@
+127.0.0.1 - - [17/Oct/2016:12:03:30 +0530] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:03:34 +0530] "GET /TaskManagerChecklist/AddTask.jsp HTTP/1.1" 200 3930
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:02 +0530] "GET /TaskManagerChecklist/AddTask.jsp HTTP/1.1" 200 3930
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /TaskManagerChecklist/task.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /TaskManagerChecklist/home.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /TaskManagerChecklist/images/banner.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /TaskManagerChecklist/images/list.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /TaskManagerChecklist/images/menu.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Oct/2016:12:04:03 +0530] "GET /favicon.ico HTTP/1.1" 404 973
