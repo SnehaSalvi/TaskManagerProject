@@ -1,0 +1,25 @@
+#font1
+{
+	
+	font-style:italic;
+	
+	font-size: 18px;
+	border: none;
+	
+	
+}
+#label1
+{
+	color:red;
+	font-size: 10px;
+	border: none;
+}
+#label2
+{
+	border: none;
+	size: 5px;
+}
+#select1
+{
+	width:340px;
+}

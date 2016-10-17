@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+D:\Task_Manager_Checklist_Project\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1221838597.index
+2207713381.index
+2022878404.index
+4102063563.index
+2700840699.index
+303388447.index

@@ -1,0 +1,6 @@
+127.0.0.1 - - [12/Oct/2016:17:27:03 +0530] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [12/Oct/2016:17:27:06 +0530] "GET /TaskManagerChecklist/Home.jsp HTTP/1.1" 200 369
+0:0:0:0:0:0:0:1 - - [12/Oct/2016:17:27:17 +0530] "GET /TaskManagerChecklist/Hello?user=Sneha HTTP/1.1" 200 37
+127.0.0.1 - - [12/Oct/2016:17:41:15 +0530] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [12/Oct/2016:17:41:17 +0530] "GET /TaskManagerChecklist/ HTTP/1.1" 200 369
+0:0:0:0:0:0:0:1 - - [12/Oct/2016:17:41:24 +0530] "GET /TaskManagerChecklist/Hello?user=Sneha HTTP/1.1" 200 37
