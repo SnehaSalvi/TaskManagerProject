@@ -34,9 +34,6 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 
-# PyDev specific (Python IDE for Eclipse)
-*.pydevproject
-
 # CDT-specific (C/C++ Development Tooling)
 .cproject
 
@@ -45,9 +42,6 @@ local.properties
 
 # Java annotation processor (APT)
 .factorypath
-
-# PDT-specific (PHP Development Tools)
-.buildpath
 
 # sbteclipse plugin
 .target

@@ -2,43 +2,49 @@ package com.task.dao.Imp;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.task.dao.TaskDao;
 import com.task.dto.Task;
 
 public class TaskDaoImp implements TaskDao 
 {
 	private Connection conn;
-	
+	private static final String INSERT_Task = "INSERT INTO mytaskdatabase.task(id,categoryid,name,date,time,reminder,status,description) VALUES(?,?,?,?,?,?,?,?)";
 	public TaskDaoImp()
 	{
 		super();
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "root");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		DataSource dataSource=new MysqlDataSource();
+		conn=dataSource.getConnection("root","root");
 
 	}
 
 	@Override
 	public boolean addTask(Task task) throws SQLException, IOException 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		 PreparedStatement pstmt = conn.prepareStatement(INSERT_Task);
+		 pstmt.setInt(1, task.getId());
+		 pstmt.setInt(2, task.getCategoryId());
+			pstmt.setString(3, task.getName());
+			pstmt.setDate(4, (Date) task.getDate());
+			pstmt.setString(3, task.getTime());
+			pstmt.setInt(4, task.getReminder());
+			pstmt.setString(5, task.getStatus());  
+			pstmt.setString(6, task.getDescription());  
+			 int result=pstmt.executeUpdate();
+	                if(result>=1)
+	                {
+	                    return true;
+	                }
+	                return false;
+		
 	}
 
 }

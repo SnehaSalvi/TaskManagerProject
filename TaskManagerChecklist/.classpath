@@ -14,6 +14,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Softwares/mysql-connector-java-5.1.40.zip"/>
+	<classpathentry kind="lib" path="D:/TaskManagerPro/TaskManagerChecklist/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
