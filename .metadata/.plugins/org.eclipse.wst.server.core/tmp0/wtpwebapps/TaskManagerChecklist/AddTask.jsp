@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="java.sql.*"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +12,7 @@
 <link href="task.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<form>
+<form name="TaskForm" action="TaskServlet" method="POST">
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -28,6 +31,7 @@
 			</td>
 		</tr>
 	</table>
+	
 	<table></table>
 	<table>
 		<tr>
@@ -57,9 +61,11 @@
 			</td>
 			<td>
 				<table id="table3">
+				
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
 							<table align="center" cellspacing="6" cellpadding="4">
+								
 								<tr>
 									<td colspan="2">
 										<input type="label" id="font1" name="label" value="Task" required="required"/>
@@ -70,27 +76,28 @@
 										<input type="text" name="taskname" placeholder="Name" size="50" required="required"/>
 									</td>
 								</tr>
-								<tr>
+										 
+								<!-- <tr>
 									<td colspan="2">
-										<select id="select1" name="categoryname" placeholder="Category" value="Category" required="required">
-											<option value="" disabled selected hidden>Category</option>
-											<option>Personal</option>
-											<option>Professional</option>
+										<select id="select1" name="${name}" placeholder="Category" value="Category" required="required">
+											<option disabled selected hidden>Category</option>
+											<option></option>
+											
 										</select>
 									</td>
-								</tr>
+								</tr> -->
 								<tr>
 									<td colspan="2">
 										<input type="text" name="categoryname" size="30" required="required"/>
 										<input type="label" id="label1" name="newcategory" value="* Add new Category" required="required"/>
 									</td>
 								</tr>
-								<tr>
-									<td colspan="2">
-										<input type="label" id="label2" name="newdate" value="Date" size="6" required="required"/>
-										<input type="date" name="date" required="required"/>
-									</td>
-								</tr>
+<!-- 								<tr> -->
+<!-- 									<td colspan="2"> -->
+<!-- 										<input type="label" id="label2" name="newdate" value="Date" size="6" required="required"/> -->
+<!-- 										<input type="date" name="date" required="required"/> -->
+<!-- 									</td> -->
+<!-- 								</tr> -->
 								<tr>
 									<td colspan="2">
 										<input type="text" name="time" placeholder="Time" size="30" required="required"/>
@@ -99,8 +106,8 @@
 								<tr>
 									<td colspan="2">
 										<input id="label2" type="label" value="Reminder" size="6" required="required"/>
-										Off<input type="radio" name="reminder" checked/>
-										On<input type="radio" name="reminder"/>
+										Off<input type="radio" name="reminder" value="0" checked/>
+										On<input type="radio" name="reminder" value="1"/>
 									</td>
 								</tr>
 								<tr>

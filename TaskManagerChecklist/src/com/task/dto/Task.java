@@ -8,19 +8,19 @@ import java.util.Date;
 public class Task implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int taskId;
 	private int categoryId;
 	private String name;
-	private Date date;
+	//private java.sql.Date date;
 	private String time;
 	private int reminder;
 	private String status;
 	private String description;
 	public int getId() {
-		return id;
+		return taskId;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.taskId = id;
 	}
 	public int getCategoryId() {
 		return categoryId;
@@ -34,12 +34,12 @@ public class Task implements Serializable
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getDate() {
+	/*public Date getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(java.sql.Date date) {
 		this.date = date;
-	}
+	}*/
 	public String getTime() {
 		return time;
 	}
@@ -69,9 +69,9 @@ public class Task implements Serializable
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + categoryId;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		//result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + id;
+		result = prime * result + taskId;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + reminder;
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -89,17 +89,17 @@ public class Task implements Serializable
 		Task other = (Task) obj;
 		if (categoryId != other.categoryId)
 			return false;
-		if (date == null) {
+		/*if (date == null) {
 			if (other.date != null)
 				return false;
 		} else if (!date.equals(other.date))
-			return false;
+			return false;*/
 		if (description == null) {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (id != other.id)
+		if (taskId != other.taskId)
 			return false;
 		if (name == null) {
 			if (other.name != null)

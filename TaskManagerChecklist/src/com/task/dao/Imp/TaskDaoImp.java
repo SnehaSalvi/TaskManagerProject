@@ -17,12 +17,17 @@ import com.task.dto.Task;
 public class TaskDaoImp implements TaskDao 
 {
 	private Connection conn;
-	private static final String INSERT_Task = "INSERT INTO mytaskdatabase.task(id,categoryid,name,date,time,reminder,status,description) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String INSERT_Task = "INSERT INTO mytaskdatabase.task(id,categoryid,name,time,reminder,status,description) VALUES(?,?,?,?,?,?,?)";
 	public TaskDaoImp()
 	{
 		super();
 		DataSource dataSource=new MysqlDataSource();
-		conn=dataSource.getConnection("root","root");
+		try {
+			conn=dataSource.getConnection("root","root");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -33,11 +38,11 @@ public class TaskDaoImp implements TaskDao
 		 pstmt.setInt(1, task.getId());
 		 pstmt.setInt(2, task.getCategoryId());
 			pstmt.setString(3, task.getName());
-			pstmt.setDate(4, (Date) task.getDate());
-			pstmt.setString(3, task.getTime());
-			pstmt.setInt(4, task.getReminder());
-			pstmt.setString(5, task.getStatus());  
-			pstmt.setString(6, task.getDescription());  
+			//pstmt.setDate(4,(Date) task.getDate());
+			pstmt.setString(4, task.getTime());
+			pstmt.setInt(5, task.getReminder());
+			pstmt.setString(6, task.getStatus());  
+			pstmt.setString(7, task.getDescription());  
 			 int result=pstmt.executeUpdate();
 	                if(result>=1)
 	                {
