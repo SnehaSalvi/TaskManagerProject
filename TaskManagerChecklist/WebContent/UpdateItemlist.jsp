@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="java.sql.*"%>
+    <%@page import="java.sql.*"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -11,21 +11,11 @@
 <title>Insert title here</title>
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript">
-function clearContent()
-{
-	document.getElementById("label2").value="";   
-}
-function revert()
-{
-	var task=document.getElementById("select1").value;   
-	document.getElementById("select1").value=task;
-}
-</script>
-
 </head>
 <body>
 <form action="SubtaskServlet" action="POST">
+<input type="hidden" name="subId" id="subId" value="${subId}" />
+
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -81,7 +71,7 @@ function revert()
 							<table align="center" cellspacing="6" cellpadding="4">
 								<tr>
 									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Add Item" readonly/>
+										<input type="label" id="font1" name="label" value="Update Item"/> 
 									</td>
 									<td>&nbsp;</td>
 								</tr>
@@ -89,37 +79,37 @@ function revert()
 									<td colspan="2">
 										<select id="select1" name="taskname" placeholder="Task" onfocus="clearContent()" required="required">
 										 <option value="">Please Select Task</option>
-											<c:forEach items="${ listOfTask }" var="task">
-												<option value="${ task.name }">${ task.name }</option> 
-											</c:forEach>
+											
+												<option value="${ taskName }">${ taskName }</option> 
+										
 										</select>
 									</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="text" name="itemname" size="30" placeholder="Name" required="required"/>
+										<input type="text" name="itemname" size="30" placeholder="Name" value="${ itemName }" required="required"/>
 									</td>
 									<td>&nbsp;</td>
 								</tr>
 								
-								<!-- <tr>
+							<%-- 	<tr>
 									<td colspan="2">
-										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
+										<input type="text" name="description" placeholder="Description" value="${ itemDescription }" size="50" required="required"/>
 									</td>
 									<td>&nbsp;</td>
-								</tr> -->
+								</tr> --%>
 								<tr>
 									<td colspan="2">
 										
 									</td>
 									<td>
-										<input type="submit" id="button1" name="button" value="Add More" onclick="revert()"/>&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" id="button1" name="button" value="Done"/>
+										<input type="submit" id="button1" name="button" value="Update"/>
 									</td>
 								</tr>
-								<tr>
+								<%-- <tr>
 								<td  colspan="3"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
-								</tr>
+								</tr> --%>
 							</table>
 						</td>
 					</tr>
@@ -128,5 +118,6 @@ function revert()
 		</tr>
 	</table>
 </form>
+
 </body>
 </html>

@@ -4,10 +4,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link href="home.css" type="text/css" rel="stylesheet"/>
+<link href="css/home.css" type="text/css" rel="stylesheet"/>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 <body>
-<form>
+<form action="HomeServlet" method="POST">
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -17,6 +18,9 @@
 			</td>
 			<td id="td2">
 				Task Manager
+			</td>
+			<td id="td4" align="center">
+				<a href="Home.jsp"><img id="list1" src="images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
@@ -30,20 +34,21 @@
 	<table>
 		<tr>
 			<td>
+			
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<input type="button" name="task" id="button2" value="Task" onclick="location.href='AddTask.jsp';"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=1"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<input type="button" name="item" id="button2" value="Item" onclick="location.href='AddItem.jsp';"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" name="button" id="button2" value="Item"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<input type="button" name="view" id="button2" value="View"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=3"><input type="button" name="button" id="button2" value="View"/></a>
 						</td>
 					</tr>
 					<tr>
@@ -56,7 +61,8 @@
 			<td>
 				<table id="table3">
 					<tr>
-						<td id="#td6">
+						<td id="#td6" align="center">
+						<h2>Welcome To My Task!!!!</h2>
 						</td>
 					</tr>
 				</table>

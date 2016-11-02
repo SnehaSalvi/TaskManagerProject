@@ -1,18 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="${pageContext.request.contextPath}/scripts/jquery.min.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link href="home.css" type="text/css" rel="stylesheet"/>
-<link href="task.css" type="text/css" rel="stylesheet"/>
+<link href="css/home.css" type="text/css" rel="stylesheet"/>
+<link href="css/task.css" type="text/css" rel="stylesheet"/>
+<link rel="stylesheet"
+ href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+
+function makeDisable()
+{
+    var x=document.getElementById("select1")
+    x.disabled=true
+
+	var d=document.getElementById("newCatT");
+	d.innerHTML+="<p><input type='text' name='categoryname1' placeholder='Category' required='required'>";
+	
+	/*  var d=document.getElementById("newCatT1");
+	 d.innerHTML+="<p><input type='button' name='addcat' value='Add' onclick='setValue()'>"; */
+	 var action = true;
+		document.getElementById("someFieldId").value = action;
+
+		
+	var x=document.getElementById("CatBTN")
+    x.disabled=true
+    
+    document.form[0].submit();
+   // action=true;
+ 
+	
+}
+
+function clearContent()
+{
+	document.getElementById("label3").value="";   
+}
+ </script>
+<script src="${pageContext.request.contextPath}/scripts/jquery.min.js" type="text/javascript"></script>
+
 </head>
 <body>
+<input type="hidden" >
 <form name="TaskForm" action="TaskServlet" method="POST">
+<input type="hidden" name="someField" id="someFieldId" />
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -22,6 +62,9 @@
 			</td>
 			<td id="td2">
 				Task Manager
+			</td>
+			<td id="td4" align="center">
+				<a href="Home.jsp"><img id="list1" src="images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
@@ -36,20 +79,21 @@
 	<table>
 		<tr>
 			<td>
+			
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<input type="button" name="task" id="button2" value="Task" onclick="location.href='AddTask.jsp';"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=1"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<input type="button" name="item" id="button2" value="Item" onclick="location.href='AddItem.jsp';"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" name="button" id="button2" value="Item"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<input type="button" name="view" id="button2" value="View"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=3"><input type="button" name="button" id="button2" value="View"/></a>
 						</td>
 					</tr>
 					<tr>
@@ -58,6 +102,7 @@
 						</td>
 					</tr>
 				</table>
+				
 			</td>
 			<td>
 				<table id="table3">
@@ -68,60 +113,83 @@
 								
 								<tr>
 									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Task" required="required"/>
+										<input type="label" id="font1" name="label" value="Task" readonly/>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="text" name="taskname" placeholder="Name" size="50" required="required"/>
+										<input type="text" name="taskname" placeholder="Name" size="50" required="required" onfocus="clearContent()" />
 									</td>
 								</tr>
-										 
+								
+								<tr>
+								
+									<td colspan="2">
+										 <select id="select1" name="categoryname" placeholder="Category" required="required">
+										 <option value="">Please Select Category</option>
+											<c:forEach items="${ listOfCategory }" var="cat">
+												<option value="${ cat.name }">${ cat.name }</option> 
+											</c:forEach>
+										</select>
+									<!-- 	<input type="button" id="CatBTN" name="newselect" value="Add category" onclick="makeDisable()"/> -->
+									</td>
+									
+								</tr>
+								
+								<tr>
+									<td id="newCatT">
+										
+									</td>
+									<td id="newCatT1" align="left">
+									<%-- <%
+       									 String x = request.getParameter("addcat");
+											if (x != null && x.equals("Add"))
+											{
+           										 //response.sendRedirect("/Initial");
+          									  RequestDispatcher dispatcher = request.getRequestDispatcher("/TaskServlet");
+           										 dispatcher.forward(request, response);
+           									}
+           									%> --%>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="label" id="label2" name="newdate" value="Date" size="6" readonly/>
+										<input type="date" name="mydate" class="tid" required="required"/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="label" id="label2" name="newtime" value="Time" size="6" readonly/>
+										<input type="time" name="time" placeholder="Time" size="30" required="required"/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input id="label2" type="label" value="Reminder" size="7" readonly/>
+										Off<input type="radio" id="radio1" name="reminder" value="0" checked required="required"/>
+										On<input type="radio" id="radio1" name="reminder" value="1" required="required"/>
+									</td>
+								</tr>
 								<!-- <tr>
 									<td colspan="2">
-										<select id="select1" name="${name}" placeholder="Category" value="Category" required="required">
-											<option disabled selected hidden>Category</option>
-											<option></option>
-											
+										 <select id="select2" name="status" placeholder="Status" required="required">
+										 <option value="">Please Select Status</option>
+											<option value="Task Finished">Task Finished</option> 
+											<option value="Task Unfinished">Task Unfinished</option>
 										</select>
 									</td>
 								</tr> -->
-								<tr>
-									<td colspan="2">
-										<input type="text" name="categoryname" size="30" required="required"/>
-										<input type="label" id="label1" name="newcategory" value="* Add new Category" required="required"/>
-									</td>
-								</tr>
-<!-- 								<tr> -->
-<!-- 									<td colspan="2"> -->
-<!-- 										<input type="label" id="label2" name="newdate" value="Date" size="6" required="required"/> -->
-<!-- 										<input type="date" name="date" required="required"/> -->
-<!-- 									</td> -->
-<!-- 								</tr> -->
-								<tr>
-									<td colspan="2">
-										<input type="text" name="time" placeholder="Time" size="30" required="required"/>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input id="label2" type="label" value="Reminder" size="6" required="required"/>
-										Off<input type="radio" name="reminder" value="0" checked/>
-										On<input type="radio" name="reminder" value="1"/>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input type="text" name="status" placeholder="Status" size="50" required="required"/>
-									</td>
-								</tr>
 								<tr>
 									<td>
 										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
 									</td>
 									<td>
-										<input type="submit" id="button1" value="Done"/>
+										<input type="submit" name="button" id="button1" value="Done" placeholder="Done"/>
 									</td>
+								</tr>
+								<tr>
+								<td  colspan="2"><input type="label" id="label3" name="message" value="${message}" size="6"/></td>
 								</tr>
 							</table>
 						</td>

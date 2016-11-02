@@ -11,7 +11,7 @@ public class Task implements Serializable
 	private int taskId;
 	private int categoryId;
 	private String name;
-	//private java.sql.Date date;
+	private Date date;
 	private String time;
 	private int reminder;
 	private String status;
@@ -34,12 +34,12 @@ public class Task implements Serializable
 	public void setName(String name) {
 		this.name = name;
 	}
-	/*public Date getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(java.sql.Date date) {
+	public void setDate(Date date) {
 		this.date = date;
-	}*/
+	}
 	public String getTime() {
 		return time;
 	}
@@ -69,7 +69,7 @@ public class Task implements Serializable
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + categoryId;
-		//result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + taskId;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -89,11 +89,11 @@ public class Task implements Serializable
 		Task other = (Task) obj;
 		if (categoryId != other.categoryId)
 			return false;
-		/*if (date == null) {
+		if (date == null) {
 			if (other.date != null)
 				return false;
 		} else if (!date.equals(other.date))
-			return false;*/
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;

@@ -54,7 +54,6 @@ public class CategoryServlet extends HttpServlet
 				rs.next();
 				categoryname=rs.getString(2);
 				request.setAttribute("categname", categoryname);
-                // req.setAttribute("bookID", bookid);
 				request.getRequestDispatcher("AddTask.jsp").forward(request, response); 
 			}
 			catch (SQLException e1) 

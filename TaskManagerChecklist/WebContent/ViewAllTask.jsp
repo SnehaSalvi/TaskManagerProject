@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="java.sql.*"%>
+      <%@page import="java.sql.*"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -11,22 +11,20 @@
 <title>Insert title here</title>
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript">
-function clearContent()
+<link href="css/view.css" type="text/css" rel="stylesheet"/>
+<script language="Javascript">
+
+function submitForm()
 {
-	document.getElementById("label2").value="";   
-}
-function revert()
-{
-	var task=document.getElementById("select1").value;   
-	document.getElementById("select1").value=task;
+document.myform.action = 'details.php';
+document.myform.method = 'post';
+document.myform.submit();
 }
 </script>
-
 </head>
 <body>
-<form action="SubtaskServlet" action="POST">
-	<table id="table1">
+<form id="myform" action="SubtaskServlet" action="POST">
+<table id="table1">
 		<tr>
 			<td id="td1">
 				<img id="banner" src="images/banner.jpg"/>
@@ -51,6 +49,7 @@ function revert()
 	<table>
 		<tr>
 			<td>
+			
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
@@ -78,55 +77,47 @@ function revert()
 				<table id="table3">
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
-							<table align="center" cellspacing="6" cellpadding="4">
+						<table align="center" cellspacing="4" cellpadding="10">
 								<tr>
 									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Add Item" readonly/>
+										<input type="label" id="font1" name="label" value="Task List" readonly/>
 									</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<select id="select1" name="taskname" placeholder="Task" onfocus="clearContent()" required="required">
-										 <option value="">Please Select Task</option>
-											<c:forEach items="${ listOfTask }" var="task">
-												<option value="${ task.name }">${ task.name }</option> 
-											</c:forEach>
-										</select>
-									</td>
-									<td>&nbsp;</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input type="text" name="itemname" size="30" placeholder="Name" required="required"/>
-									</td>
-									<td>&nbsp;</td>
-								</tr>
-								
-								<!-- <tr>
-									<td colspan="2">
-										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
-									</td>
-									<td>&nbsp;</td>
-								</tr> -->
-								<tr>
-									<td colspan="2">
+									<div style="overflow:scroll;height:200px;width:100%;overflow:auto">
+									
+									<table id=""border="1" cellpadding="6" width="355" height="180" cellspacing="0">
+										<c:forEach items="${ listOfTask }" var="task">
+										<tr>
+									
+											<td>
 										
-									</td>
-									<td>
-										<input type="submit" id="button1" name="button" value="Add More" onclick="revert()"/>&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" id="button1" name="button" value="Done"/>
+								<%-- 	<a href="HomeServlet?taskId=<c:out value="${task.taskId }"/>&button=<c:out value="${task.taskId}"/>&taskname=<c:out value="${task.name}"/>"> --%><%-- <a href="HomeServlet?button=7&taskId=<c:out value="${task.taskId}"/>&taskname=<c:out value="${task.name}"/>"> --%>${task.name }<!-- </a> -->
+												<%-- <input type="hidden" name="taskId" value="${task.taskId }" />
+													<input type="hidden" name="taskname" value="${task.name }" />
+												<input type="hidden" name="button" value="View" />
+ --%>
+											</td>
+											
+										</tr>
+											</c:forEach> 
+									</table>
+										</div>	
+								
 									</td>
 								</tr>
-								<tr>
-								<td  colspan="3"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
-								</tr>
-							</table>
+							
+								
+								
+						</table>
 						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-</form>
+	</form>
 </body>
 </html>

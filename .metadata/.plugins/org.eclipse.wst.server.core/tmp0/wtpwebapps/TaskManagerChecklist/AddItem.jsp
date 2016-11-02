@@ -1,16 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="java.sql.*"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link href="home.css" type="text/css" rel="stylesheet"/>
-<link href="item.css" type="text/css" rel="stylesheet"/>
+<link href="css/home.css" type="text/css" rel="stylesheet"/>
+<link href="css/item.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript">
+function clearContent()
+{
+	document.getElementById("label2").value="";   
+}
+function revert()
+{
+	var task=document.getElementById("select1").value;   
+	document.getElementById("select1").value=task;
+}
+</script>
 
 </head>
 <body>
-<form>
+<form action="SubtaskServlet" action="POST">
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -20,6 +35,9 @@
 			</td>
 			<td id="td2">
 				Task Manager
+			</td>
+			<td id="td4" align="center">
+				<a href="Home.jsp"><img id="list1" src="images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
@@ -36,17 +54,17 @@
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<input type="button" name="task" id="button2" value="Task" onclick="location.href='AddTask.jsp';"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=1"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<input type="button" name="item" id="button2" value="Item" onclick="location.href='AddItem.jsp';"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" name="button" id="button2" value="Item"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<input type="button" name="view" id="button2" value="View"/>
+							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=3"><input type="button" name="button" id="button2" value="View"/></a>
 						</td>
 					</tr>
 					<tr>
@@ -63,14 +81,17 @@
 							<table align="center" cellspacing="6" cellpadding="4">
 								<tr>
 									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Add Item" required="required"/>
+										<input type="label" id="font1" name="label" value="Add Item" readonly/>
 									</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<select id="select1" name="taskname" value="task" required="required">
-											<option value="" disabled selected hidden>Select the task </option>
+										<select id="select1" name="taskname" placeholder="Task" onfocus="clearContent()" required="required">
+										 <option value="">Please Select Task</option>
+											<c:forEach items="${ listOfTask }" var="task">
+												<option value="${ task.name }">${ task.name }</option> 
+											</c:forEach>
 										</select>
 									</td>
 									<td>&nbsp;</td>
@@ -82,19 +103,22 @@
 									<td>&nbsp;</td>
 								</tr>
 								
-								<tr>
+								<!-- <tr>
 									<td colspan="2">
 										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
 									</td>
 									<td>&nbsp;</td>
-								</tr>
+								</tr> -->
 								<tr>
 									<td colspan="2">
 										
 									</td>
 									<td>
-										<input type="submit" id="button1" name="addmore" value="Add More"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" id="button1" name="done" value="Done"/>
+										<input type="submit" id="button1" name="button" value="Add More" onclick="revert()"/>&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" id="button1" name="button" value="Done"/>
 									</td>
+								</tr>
+								<tr>
+								<td  colspan="3"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
 								</tr>
 							</table>
 						</td>
