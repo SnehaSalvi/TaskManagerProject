@@ -119,6 +119,8 @@ public class SubtaskServlet extends HttpServlet
 		}
 		else if(button.equalsIgnoreCase("Add"))
 		{
+			
+			System.out.println("TaskName:"+taskName);
 			request.setAttribute("taskName", taskName);
 		
 			RequestDispatcher rd = request.getRequestDispatcher("AddTaskItem.jsp");

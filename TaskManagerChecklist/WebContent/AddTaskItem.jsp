@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
+<link href="css/taskview.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
 function clearContent()
 {

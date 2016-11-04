@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
+<link href="css/taskview.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <form action="SubtaskServlet" method="POST">
@@ -77,12 +78,7 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<select id="select1" name="taskname" placeholder="Task" onfocus="clearContent()" required="required">
-										 <option value="">Please Select Task</option>
-											
-												<option value="${ taskName }">${ taskName }</option> 
-										
-										</select>
+										<input type="text" name="taskname" id="default_text" size="30" value="${ taskName }" onfocus="clearContent()" required="required" readonly/>
 									</td>
 									<td>&nbsp;</td>
 								</tr>

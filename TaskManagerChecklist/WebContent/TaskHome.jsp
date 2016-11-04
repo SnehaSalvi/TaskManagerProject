@@ -97,7 +97,7 @@
 											<form id="myform" action="HomeServlet" method="POST">		
 												
 											<input type="hidden" name="taskId" value="${task.taskId}"/>
-											<input type="submit" id="editBTN" name="button" value="View Item">
+											<input type="submit" id="editBTN" width="25" name="button" value="Add Item">
 											</form>
 											</td>
 											

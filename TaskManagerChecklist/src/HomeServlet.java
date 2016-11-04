@@ -245,7 +245,7 @@ public class HomeServlet extends HttpServlet
 		}
 		
 	
-		else if(button_action.equalsIgnoreCase("View Item"))
+		else if(button_action.equalsIgnoreCase("View Item") || button_action.equalsIgnoreCase("Add Item"))
 		{
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;

@@ -19,3 +19,21 @@
 	border: none;
 	font-weight: bold;
 }
+#default_text
+{
+	background-color: #c0c0c0;
+	border: 0;
+}
+
+#editBTN12
+{
+	height: 25px;
+	 width: 180px;
+	 border-radius: 8px;
+    border: 1px solid #000;
+    font-family:sans-serif;
+    font-size: 13px;
+   background-color:#6597b1;
+   color:#fcdf14;
+    border: 0;
+}

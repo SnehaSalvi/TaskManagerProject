@@ -59,6 +59,7 @@ function clearContent()
 </head>
 <body>
 <form action="SubtaskServlet" method="POST">
+<input type="hidden" name="taskname" value="${taskName}"/>
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -129,7 +130,7 @@ function clearContent()
 											</tr>
 											<c:forEach items="${ listOfItem }" var="item">
 											<tr>
-												<td> ${ item.name }<input type="hidden" name="taskname" value="${taskName}"/>
+												<td> ${ item.name }
 											<input type="hidden" name="subtaskId" value="${item.subtaskID}"/>
 												<input type="hidden" name="taskId" value="${item.taskId}"/>
 													<input type="hidden" name="itemName" value="${item.name}"/>
