@@ -89,6 +89,18 @@ body
 #button2 
 {
     height: 40px;
+    width: 150px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    font-family:sans-serif;
+    font-size: 13px;
+   background-color:#366489;
+   color:white;
+    border: 0;
+}
+#buttonCreate 
+{
+    height: 40px;
     width: 180px;
     border-radius: 8px;
     border: 1px solid #000;
@@ -96,6 +108,18 @@ body
     font-size: 13px;
    background-color:#366489;
    color:white;
+    border: 0;
+}
+#create
+{
+    height: 25px;
+    width: 65px;
+    border-radius: 7px;
+    border: 1px solid #000;
+    font-family: sans-serif;
+    background-color:white;
+    color:#366489;
+    font-size: 11px;
     border: 0;
 }
 #img1

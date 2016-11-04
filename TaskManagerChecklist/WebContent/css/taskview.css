@@ -1,0 +1,21 @@
+#createBTN1
+{
+    height: 30px;
+    width: 180px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    font-family:sans-serif;
+    font-size: 13px;
+   background-color:#6597b1;
+   color:#fcdf14;
+    border: 0;
+}
+
+#fonttitle
+{
+	font-style:italic;
+	
+	font-size: 18px;
+	border: none;
+	font-weight: bold;
+}

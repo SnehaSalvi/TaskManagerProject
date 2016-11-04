@@ -58,7 +58,7 @@ function clearContent()
 </script>
 </head>
 <body>
-<form action="HomeServlet" action="GET">
+<form action="SubtaskServlet" method="POST">
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -121,7 +121,7 @@ function clearContent()
 								</tr>
 								<tr>
 									<td colspan="2">
-										<table id="tableView" border="1" align="center" cellspacing="3" cellpadding="10">
+										<table id="tableView" border="1" align="center" cellspacing="3" cellpadding="10" width=290>
 											<tr>
 												<th colspan="2">
 												 ${taskName}
@@ -145,16 +145,20 @@ function clearContent()
 								<br/>
 								</tr>
 								
-								
 								<tr>
-									<td colspan="2">
-									<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" id="removeBTN" name="add" value="Add" onfocus="clearContent()"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<td colspan="2" align="center">
+								<input type="label" id="label2" name="message" value="${message}" size="6"/>
+								</td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center">
+									<input type="submit" id="removeBTN" name="button" value="Add" onfocus="clearContent()"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="submit" id="editBTN" name="button" value="edit" onclick="EditAll()" onfocus="clearContent()"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="submit" id="removeBTN" name="button" value="delete" onclick="RemoveAll()" onfocus="clearContent()"/>
 									</td>
 								</tr>
 								<tr>
-								<td  colspan="2" align="center"><input type="label" id="label2" name="message" value="${message}" size="6"/><br/>
+								<td  colspan="2" align="center">
 								<br/><input type="label" id="label2" name="message" value="${status}" size="6"/>
 								</td>
 								</tr>

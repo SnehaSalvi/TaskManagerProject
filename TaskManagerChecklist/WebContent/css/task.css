@@ -6,7 +6,7 @@
 	font-size: 18px;
 	border: none;
 	
-	
+	font-weight: bold;
 }
 #label1
 {
@@ -39,6 +39,11 @@
 {
 	color:red;
 	font-size: 16px;
+}
+#datepicker
+{
+	width:100px;
+	height:70px;
 }
 #CatBTN
 {

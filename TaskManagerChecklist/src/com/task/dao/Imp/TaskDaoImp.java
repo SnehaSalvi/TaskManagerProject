@@ -22,7 +22,8 @@ public class TaskDaoImp implements TaskDao
 {
 	private Connection conn;
 	private static final String INSERT_Task = "INSERT INTO mytaskdatabase.task(id,categoryid,name,date,time,reminder,status,description) VALUES(?,?,?,?,?,?,?,?)";
-	private static final String Select_All_Task ="SELECT * FROM mytaskdatabase.task";
+	private static final String Select_All_Task ="SELECT id, name FROM mytaskdatabase.task";
+	private static final String Select_All_Task_Name ="SELECT name FROM mytaskdatabase.task where id=?";
 	public TaskDaoImp()
 	{
 		super();
@@ -40,7 +41,7 @@ public class TaskDaoImp implements TaskDao
 	public boolean addTask(Task task) throws SQLException, IOException 
 	{
 		 PreparedStatement pstmt = conn.prepareStatement(INSERT_Task);
-		 	pstmt.setInt(1, task.getId());
+		 	pstmt.setInt(1, task.getTaskId());
 		 	pstmt.setInt(2, task.getCategoryId());
 			pstmt.setString(3, task.getName());
 			pstmt.setDate(4,new java.sql.Date(task.getDate().getTime()));
@@ -68,7 +69,17 @@ public class TaskDaoImp implements TaskDao
 		}
 		
 	}
-
+	@Override
+	public Task getTaskName(int taskId) throws SQLException 
+	{
+		PreparedStatement pstmt = conn.prepareStatement(Select_All_Task_Name);
+		pstmt.setInt(1, taskId);
+		ResultSet rs = pstmt.executeQuery();
+		rs.next();
+		Task task = new Task();
+		task.setName(rs.getString(1));
+		return task;
+	}
 	@Override
 	public List<Task> findAllTask() throws SQLException 
 	{
@@ -79,8 +90,9 @@ public class TaskDaoImp implements TaskDao
 		while (rs.next()) {
 			
 			Task task = new Task();
-			task.setId(rs.getInt("id"));
-			task.setName(rs.getString("name"));
+			task.setTaskId(rs.getInt(1));
+			
+			task.setName(rs.getString(2));
 			
 			listOfTask.add(task);
 		}

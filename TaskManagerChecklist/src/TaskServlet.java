@@ -97,7 +97,7 @@ public class TaskServlet extends HttpServlet
 					
 					 try 
 					 {
-						date1 = new SimpleDateFormat("yyyy-dd-MM").parse(request.getParameter("mydate"));
+						date1 = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("mydate"));
 					
 						task.setDate(date1);
 					 } catch (ParseException e) {

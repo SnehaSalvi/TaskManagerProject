@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-      <%@page import="java.sql.*"%>
+    <%@page import="java.sql.*"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -12,13 +12,13 @@
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
 <link href="css/view.css" type="text/css" rel="stylesheet"/>
+<link href="css/taskview.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
 
 
 </script>
 </head>
 <body>
-
 <table id="table1">
 		<tr>
 			<td id="td1">
@@ -111,8 +111,8 @@
 								</tr>
 							
 							<tr>
-											<td colspan="2">
-											
+											<td colspan="2" align="right">
+												<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=6"><input type="button" name="button" id="createBTN1" value="Create New Task"/></a>
 											</td>
 											</tr>
 								
@@ -123,6 +123,5 @@
 			</td>
 		</tr>
 	</table>
-	
 </body>
 </html>

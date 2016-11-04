@@ -139,7 +139,7 @@ public class SubtaskDaoImp implements SubtaskDao
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
 			Task task=new Task();
-			task.setId(rs.getInt(1));
+			task.setTaskId(rs.getInt(1));
 			task.setName(rs.getString(2));
 			Subtask sub=new Subtask();
 			sub.setSubtaskID(rs.getInt(3));

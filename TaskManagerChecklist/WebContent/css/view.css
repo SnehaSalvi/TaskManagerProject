@@ -33,11 +33,58 @@
     font-size: 11px;
     border: 0;
 }
+#editBTN1
+{
+	height: 25px;
+    width: 65px;
+    border-radius: 7px;
+    border: 1px solid #000;
+    font-family: sans-serif;
+    background-color:#366489;
+    color:white;
+    font-size: 11px;
+    border: 0;
+}
+#createBTN
+{
+	height: 25px;
+    width: 65px;
+    border-radius: 7px;
+    border: 1px solid #000;
+    font-family: sans-serif;
+    background-color:white;
+    color:#366489;
+    font-size: 11px;
+    border: 0;
+}
 #tableView
 {
 	border: thick;
 	background-color: #abecef;
 	border-color: black;
+	width: 550px;
+}
+#tableView1
+{
+	border: thick;
+	background-color: white;
+	border-color: black;
+}
+#create
+{
+    height: 25px;
+    width: 65px;
+    border-radius: 7px;
+    border: 1px solid #000;
+    font-family: sans-serif;
+    background-color:white;
+    color:#366489;
+    font-size: 11px;
+    border: 0;
+}
+#td9
+{
+	color: #abecef;
 }
 #check
 {

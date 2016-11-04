@@ -11,5 +11,6 @@ public interface TaskDao
 {
 	boolean addTask(Task  task)throws SQLException,IOException;
 	List<Task> findAllTask() throws SQLException;
+	public Task getTaskName(int taskId) throws SQLException ;
 	public void close();
 }

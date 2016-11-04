@@ -13,7 +13,7 @@
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<form action="SubtaskServlet" action="POST">
+<form action="SubtaskServlet" method="POST">
 <input type="hidden" name="subId" id="subId" value="${subId}" />
 
 	<table id="table1">

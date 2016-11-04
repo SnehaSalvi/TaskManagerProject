@@ -16,11 +16,11 @@ public class Task implements Serializable
 	private int reminder;
 	private String status;
 	private String description;
-	public int getId() {
+	public int getTaskId() {
 		return taskId;
 	}
-	public void setId(int id) {
-		this.taskId = id;
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
 	}
 	public int getCategoryId() {
 		return categoryId;

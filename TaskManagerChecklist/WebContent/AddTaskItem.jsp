@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-      <%@page import="java.sql.*"%>
+    <%@page import="java.sql.*"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -11,15 +11,21 @@
 <title>Insert title here</title>
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
-<link href="css/view.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
-
-
+function clearContent()
+{
+	document.getElementById("label2").value="";   
+}
+function revert()
+{
+	var task=document.getElementById("select1").value;   
+	document.getElementById("select1").value=task;
+}
 </script>
 </head>
 <body>
-
-<table id="table1">
+<form action="SubtaskServlet" action="POST">
+	<table id="table1">
 		<tr>
 			<td id="td1">
 				<img id="banner" src="images/banner.jpg"/>
@@ -44,7 +50,6 @@
 	<table>
 		<tr>
 			<td>
-			
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
@@ -72,57 +77,54 @@
 				<table id="table3">
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
-						<table align="center" cellspacing="4" cellpadding="10">
+							<table align="center" cellspacing="6" cellpadding="4">
 								<tr>
 									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Task List" readonly/>
+										<input type="label" id="font1" name="label" value="Add Item" readonly/>
 									</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-									<div style="overflow:scroll;height:200px;width:100%;overflow:auto">
-									
-									<table id="tableView1" cellpadding="6" width="510" height="180" cellspacing="2">
-										<c:forEach items="${ listOfTask }" var="task">
-										<tr>
-									
-											<td colspan="3" bgcolor="#abecef">
-										
-												
-													
-												${task.name }
-												 </td>
-											<td align="right" bgcolor="#abecef" width="70">
-											<form id="myform" action="HomeServlet" method="POST">		
-												
-											<input type="hidden" name="taskId" value="${task.taskId}"/>
-											<input type="submit" id="editBTN" name="button" value="View Item">
-											</form>
-											</td>
+										<%-- <select id="select1" name="taskname" placeholder="Task" onfocus="clearContent()" required="required">
+												<option value="${ taskName }">${ taskName }</option> 
 											
-										</tr>
-											</c:forEach> 
-											
-									</table>
-										</div>	
+										</select> --%>
+										<input type="text" name="taskname" id="default_text" size="30" value="${ taskName }" onfocus="clearContent()" required="required" readonly/>
+									</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="text" name="itemname" size="30" placeholder="Name" onfocus="clearContent()" required="required"/>
+									</td>
+									<td>&nbsp;</td>
+								</tr>
 								
+								<!-- <tr>
+									<td colspan="2">
+										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
+									</td>
+									<td>&nbsp;</td>
+								</tr> -->
+								<tr>
+									<td colspan="2">
+										
+									</td>
+									<td>
+										<input type="submit" id="button1" name="button" value="Add More" onclick="revert()"/>&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" id="button1" name="button" value="Done"/>
 									</td>
 								</tr>
-							
-							<tr>
-											<td colspan="2">
-											
-											</td>
-											</tr>
-								
-						</table>
+								<tr>
+								<td  colspan="3"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
+								</tr>
+							</table>
 						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-	
+</form>
 </body>
 </html>
