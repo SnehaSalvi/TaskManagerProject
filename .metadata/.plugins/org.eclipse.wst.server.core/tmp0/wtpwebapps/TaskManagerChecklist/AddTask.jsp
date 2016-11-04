@@ -12,12 +12,22 @@
 <title>Insert title here</title>
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/task.css" type="text/css" rel="stylesheet"/>
-<link rel="stylesheet"
- href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+	  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 
+	$(function() 
+	{
+	    $( "#datepicker" ).datepicker();
+	    $('#timepicker1').timepicker();
+
+	});
+	
 function makeDisable()
 {
     var x=document.getElementById("select1")
@@ -45,9 +55,19 @@ function clearContent()
 {
 	document.getElementById("label3").value="";   
 }
- </script>
-<script src="${pageContext.request.contextPath}/scripts/jquery.min.js" type="text/javascript"></script>
 
+ </script>
+ <style type="text/css">
+.ui-datepicker {
+   background: #333;
+   border: 1px solid #555;
+   color: #EEE;
+	font-size: 2;
+
+ }
+</style>
+<script src="${pageContext.request.contextPath}/scripts/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </head>
 <body>
 <input type="hidden" >
@@ -113,7 +133,7 @@ function clearContent()
 								
 								<tr>
 									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Task" readonly/>
+										<input type="label" id="font1" name="label" value="Add Task" readonly/>
 									</td>
 								</tr>
 								<tr>
@@ -155,13 +175,15 @@ function clearContent()
 								<tr>
 									<td colspan="2">
 										<input type="label" id="label2" name="newdate" value="Date" size="6" readonly/>
-										<input type="date" name="mydate" class="tid" required="required"/>
+										<input type="text" name="mydate" class="tid" id="datepicker"/>
+									<!-- 	<input type="date" name="mydate" class="tid" required="required"/> -->
 									</td>
 								</tr>
 								<tr>
 									<td colspan="2">
 										<input type="label" id="label2" name="newtime" value="Time" size="6" readonly/>
 										<input type="time" name="time" placeholder="Time" size="30" required="required"/>
+								<!-- 	  <input id="timepicker1" type="text"  name="time" class="input-small"> -->
 									</td>
 								</tr>
 								<tr>

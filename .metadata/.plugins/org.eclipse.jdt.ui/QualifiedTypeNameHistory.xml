@@ -27,8 +27,8 @@
 <fullyQualifiedTypeName name="com.task.dto.Subtask"/>
 <fullyQualifiedTypeName name="com.task.dao.SubtaskDao"/>
 <fullyQualifiedTypeName name="com.task.dao.Imp.SubtaskDaoImp"/>
-<fullyQualifiedTypeName name="com.task.dto.Task"/>
 <fullyQualifiedTypeName name="com.task.dao.TaskDao"/>
 <fullyQualifiedTypeName name="com.task.dao.Imp.TaskDaoImp"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.task.dto.Task"/>
 </qualifiedTypeNameHistroy>
