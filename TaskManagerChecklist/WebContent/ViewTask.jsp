@@ -12,7 +12,7 @@
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
 <link href="css/view.css" type="text/css" rel="stylesheet"/>
-
+<link href="css/link.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
 
 function EditAll()
@@ -122,20 +122,18 @@ function clearContent()
 								</tr>
 								<tr>
 									<td colspan="2">
-										<table id="tableView" border="1" align="center" cellspacing="3" cellpadding="10" width=290>
+										<table id="tableView" border="1" align="center" cellspacing="3" cellpadding="0" width="100">
 											<tr>
 												<th colspan="2">
-												 ${taskName}
+												<h3> ${taskName}</h3>
 												</th>
 											</tr>
 											<c:forEach items="${ listOfItem }" var="item">
 											<tr>
-												<td> ${ item.name }
-											<input type="hidden" name="subtaskId" value="${item.subtaskID}"/>
-												<input type="hidden" name="taskId" value="${item.taskId}"/>
-													<input type="hidden" name="itemName" value="${item.name}"/>
-													<input type="hidden" name="itemStatus" value="${item.status}"/></td>
-												<td><input type="checkbox" id="check" name="check1" value="${item.subtaskID}" onfocus="clearContent()"/></td>	
+													<td>	 ${ item.name }</td>
+												<td><input type="checkbox" id="check" name="check1" value="${item.subtaskID}" onfocus="clearContent()"/>	
+							
+											
 											</tr>
 													
 											</c:forEach> 
