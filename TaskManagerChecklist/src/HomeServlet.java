@@ -40,6 +40,8 @@ public class HomeServlet extends HttpServlet
 	
 	private static final String Select_Subtask_Count = "select count(id) from mytaskdatabase.subtask where taskid=?";
 	private static final String Update_Task_Status="UPDATE mytaskdatabase.task SET reminder=?,status=? where id=?";
+	private static final String Select_Task_Count = "select count(id) from mytaskdatabase.task";
+	private static final String Select_Subtask_Status_Count = "select count(id) from mytaskdatabase.subtask where taskid=? and status='Item Scheduled'";
 	private Connection conn;  
     public HomeServlet() 
     {
@@ -72,18 +74,35 @@ public class HomeServlet extends HttpServlet
 		System.out.println(button_action);
 		CategoryDao categoryDao=null;
 		TaskDao taskDao=null;
+		
 		if(button_action.equalsIgnoreCase("1"))
 		{
 			taskDao=new TaskDaoImp();
 			
 			List listOfTask;
 			try {
-				listOfTask = taskDao.findAllTask();
-			
+				PreparedStatement pstmt = conn.prepareStatement(Select_Task_Count);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				int count=rs.getInt(1);
+				if(count<=0)
+				{
+					String message="No Item in a list";
+					request.setAttribute("message", message);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("TaskHome.jsp");
+					rd.forward(request, response);
+							
+				}
+				else
+				{
+					listOfTask = taskDao.findAllTask();
+					
 					request.setAttribute("listOfTask", listOfTask);
 					
 					RequestDispatcher rd = request.getRequestDispatcher("TaskHome.jsp");
 					rd.forward(request, response);
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -260,7 +279,7 @@ public class HomeServlet extends HttpServlet
 					rs = pstmt.executeQuery();
 					rs.next();
 					String taskName=rs.getString(1);
-					pstmt = conn.prepareStatement(Select_Subtask_Count);
+					pstmt = conn.prepareStatement(Select_Subtask_Status_Count);
     				
     				pstmt.setInt(1, taskId);
     				rs = pstmt.executeQuery();
@@ -269,10 +288,11 @@ public class HomeServlet extends HttpServlet
     				if(count<=0)
     				{
 					SubtaskDao subDao=new SubtaskDaoImp();
-					List<Subtask> listOfItem = subDao.findAllItemByID(taskId);
+					List<Subtask> listOfItem1 = subDao.findAllItemStatus(taskId);
+					
 					String message="No Item in a list!!!";
 					request.setAttribute("message", message);
-					
+					request.setAttribute("listOfItem1",listOfItem1);
 					request.setAttribute("taskName",taskName);
 					RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
 					rd.forward(request, response);
@@ -281,8 +301,10 @@ public class HomeServlet extends HttpServlet
     				{
     					SubtaskDao subDao=new SubtaskDaoImp();
     					List<Subtask> listOfItem = subDao.findAllItemByID(taskId);
+    					List<Subtask> listOfItem1 = subDao.findAllItemStatus(taskId);
     					request.setAttribute("taskName",taskName);
     					request.setAttribute("listOfItem",listOfItem);
+    					request.setAttribute("listOfItem1",listOfItem1);
     					RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
     					rd.forward(request, response);
     				}

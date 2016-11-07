@@ -103,7 +103,11 @@
 											
 										</tr>
 											</c:forEach> 
-											
+											<tr>
+											<td colspan="4" align="center">
+											${message}
+											</td>
+											</tr>
 									</table>
 										</div>	
 								

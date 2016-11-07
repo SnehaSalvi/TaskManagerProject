@@ -12,7 +12,7 @@
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
 <link href="css/view.css" type="text/css" rel="stylesheet"/>
-<link href="css/link.css" type="text/css" rel="stylesheet"/>
+<link href="css/viewItem.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
 
 function EditAll()
@@ -122,38 +122,56 @@ function clearContent()
 								</tr>
 								<tr>
 									<td colspan="2">
-										<table id="tableView" border="1" align="center" cellspacing="3" cellpadding="0" width="100">
+									<div style="overflow:scroll;height:135px;width:100%;overflow:auto">
+										<table id="tableView2" align="center" cellspacing="0" cellpadding="7" width="250" bgcolor="#abecef">
 											<tr>
 												<th colspan="2">
-												<h3> ${taskName}</h3>
+												 ${taskName}
 												</th>
 											</tr>
 											<c:forEach items="${ listOfItem }" var="item">
 											<tr>
-													<td>	 ${ item.name }</td>
-												<td><input type="checkbox" id="check" name="check1" value="${item.subtaskID}" onfocus="clearContent()"/>	
-							
-											
+											<td colspan="2">
+											<input type="checkbox" id="check" name="check1" value="${item.subtaskID}" onfocus="clearContent()"/>	
+										
+												${ item.name }
+													<input type="hidden" name="taskId" value="${item.taskId}"/></td>
+													
 											</tr>
 													
 											</c:forEach> 
-										</table>
-									
+											<tr>
+												<td colspan="2" align="center">
+													${message}
+												</td>
+											
+											</tr>
+									</table>
+										</div>
+										<div style="overflow:scroll;height:110px;width:100%;overflow:auto">
+									<table id="tableView3" align="center" cellspacing="0" cellpadding="7" width="250" bgcolor="#abecef">
+										<hr>	
+											<tr>
+											
+											<th colspan="2" align="left">:: List of Completed Items</th>
+											</tr>
+										<c:forEach items="${ listOfItem1 }" var="item1">
+											<tr>
+												<td colspan="2">
+													<s>${ item1.name }</s>
+												</td>
+											</tr>
+										</c:forEach>
+								</table>
+									</div> 
 									</td>
-								</tr>
-								<br/>
 								</tr>
 								
 								<tr>
-								<td colspan="2" align="center">
-								<input type="label" id="label2" name="message" value="${message}" size="6"/>
-								</td>
-								</tr>
-								<tr>
 									<td colspan="2" align="center">
-									<input type="submit" id="removeBTN" name="button" value="Add" onfocus="clearContent()"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="submit" id="editBTN" name="button" value="edit" onclick="EditAll()" onfocus="clearContent()"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="submit" id="removeBTN" name="button" value="delete" onclick="RemoveAll()" onfocus="clearContent()"/>
+									<input type="submit" id="removeBTN" name="button" value="Add" onfocus="clearContent()"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="submit" id="editBTN" name="button" value="Edit" onclick="EditAll()" onfocus="clearContent()"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="submit" id="removeBTN" name="button" value="Complete" onclick="RemoveAll()" onfocus="clearContent()"/>
 									</td>
 								</tr>
 								<tr>
@@ -161,6 +179,9 @@ function clearContent()
 								<br/><input type="label" id="label2" name="message" value="${status}" size="6"/>
 								</td>
 								</tr>
+								
+								
+								
 						</table>
 						</td>
 					</tr>

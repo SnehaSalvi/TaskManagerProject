@@ -33,8 +33,12 @@ public class SubtaskServlet extends HttpServlet
 	private static final String Select_Subtask = "SELECT taskid,name,status FROM mytaskdatabase.subtask where id=?";
 	private static final String Select_Task_Name = "SELECT name FROM mytaskdatabase.task where id=?";
 	private static final String Delete_Subtask = "DELETE FROM mytaskdatabase.subtask where id=?";
+	private static final String UPDATE_Subtask_Status = "UPDATE mytaskdatabase.subtask SET status='Item Completed' where id=?";
 	
 	private static final String Select_Subtask_Count = "select count(id) from mytaskdatabase.subtask where taskid=?";
+	private static final String Select_Subtask_Status_Count = "select count(id) from mytaskdatabase.subtask where taskid=? and status='Item Scheduled'";
+	private static final String Select_Subtask_Status_Count1 = "select count(id) from mytaskdatabase.subtask where taskid=? and status='Item Completed'";
+	
 	//private static final String Get_SubtaskId = "SELECT id FROM mytaskdatabase.subtask where name=?";
 	private Connection conn;
     public SubtaskServlet() 
@@ -126,7 +130,7 @@ public class SubtaskServlet extends HttpServlet
 			RequestDispatcher rd = request.getRequestDispatcher("AddTaskItem.jsp");
 			rd.forward(request, response);
 		}
-		else if(button.equalsIgnoreCase("edit"))
+		else if(button.equalsIgnoreCase("Edit"))
 		{
 			
 		
@@ -172,7 +176,71 @@ public class SubtaskServlet extends HttpServlet
 	
 			
 		}
-		else if(button.equalsIgnoreCase("delete"))
+		else if(button.equalsIgnoreCase("Complete"))
+		{
+			int subtaskID=Integer.parseInt(request.getParameter("check1")); 
+			taskName=request.getParameter("taskname");
+		    SubtaskDao subDao=new SubtaskDaoImp();
+		 try
+		 {
+            
+				
+				pstmt = conn.prepareStatement(UPDATE_Subtask_Status);
+				pstmt.setInt(1,subtaskID);
+				int result=pstmt.executeUpdate();
+				if(result>=1)
+	            {
+	            	pstmt = conn.prepareStatement(Select_Subtask_Status_Count);
+					
+					pstmt.setInt(1, Integer.parseInt(request.getParameter("taskId")));
+					rs = pstmt.executeQuery();
+					rs.next();
+					int count=rs.getInt(1);
+					if(count<=0)
+					{
+						List<Subtask> listOfItem1 = subDao.findAllItemStatus(Integer.parseInt(request.getParameter("taskId")));
+						String message="No Item in a list!!!";
+    					request.setAttribute("message", message);
+						request.setAttribute("taskName",taskName);
+						request.setAttribute("listOfItem1",listOfItem1);
+						RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
+						rd.forward(request, response);
+					}
+					else
+					{
+						pstmt = conn.prepareStatement(Select_Subtask_Status_Count1);
+	    				
+	    				pstmt.setInt(1, Integer.parseInt(request.getParameter("taskId")));
+	    				rs = pstmt.executeQuery();
+	    				rs.next();
+	    				int count1=rs.getInt(1);
+							List<Subtask> listOfItem = subDao.findAllItemByID(Integer.parseInt(request.getParameter("taskId")));
+							List<Subtask> listOfItem1 = subDao.findAllItemStatus(Integer.parseInt(request.getParameter("taskId")));
+							String message=count1+" Item Completed!!!";
+	    					request.setAttribute("status", message);
+							request.setAttribute("taskName",taskName);
+							request.setAttribute("listOfItem",listOfItem);
+							request.setAttribute("listOfItem1",listOfItem1);
+							RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
+							rd.forward(request, response);
+					}
+	            }
+				else 
+				{
+					String message="Error!!!";
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("ViewTask").forward(request, response);
+				}
+			} 
+			catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+		}
+		/*else if(button.equalsIgnoreCase("delete"))
 		{
 			int subtaskID=Integer.parseInt(request.getParameter("check1")); 
 			System.out.println("subtaskID"+subtaskID);
@@ -227,7 +295,7 @@ public class SubtaskServlet extends HttpServlet
 		                    
 		                }
 		               
-	              /*  if(result)
+	                if(result)
 	                {
 	                	List<Subtask> listOfItem = subDao.findAllItemByID(Integer.parseInt(request.getParameter("taskId")));
 						String message="Record Deleted Successfully!!!";
@@ -236,7 +304,7 @@ public class SubtaskServlet extends HttpServlet
 						request.setAttribute("listOfItem",listOfItem);
 						RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
 						rd.forward(request, response);
-	                }*/
+	                }
 	                else
 					{
 						String message="Error!!!";
@@ -249,7 +317,7 @@ public class SubtaskServlet extends HttpServlet
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 		else if(button.equalsIgnoreCase("Done"))
 		{
 			try {
@@ -277,8 +345,11 @@ public class SubtaskServlet extends HttpServlet
 				        pstmt.executeUpdate();
 						SubtaskDao subDao=new SubtaskDaoImp();
 						List<Subtask> listOfItem = subDao.findAllItemByID(taskId);
+						List<Subtask> listOfItem1 = subDao.findAllItemStatus(taskId);
+						
 						request.setAttribute("taskName",taskName);
 						request.setAttribute("listOfItem",listOfItem);
+						request.setAttribute("listOfItem1",listOfItem1);
 						RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
 						rd.forward(request, response);
 					}
@@ -326,10 +397,12 @@ public class SubtaskServlet extends HttpServlet
 				{
 					
 					List<Subtask> listOfItem = subDao.findAllItemByID(taskId);
+					List<Subtask> listOfItem1 = subDao.findAllItemStatus(taskId);
 					String message="Record Updated Successfully!!!";
-					request.setAttribute("message", message);
+					request.setAttribute("status", message);
 					request.setAttribute("taskName",taskName);
 					request.setAttribute("listOfItem",listOfItem);
+					request.setAttribute("listOfItem1",listOfItem1);
 					RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
 					rd.forward(request, response);
 				}
@@ -355,9 +428,10 @@ public class SubtaskServlet extends HttpServlet
 			try 
 			{
 				listOfItem = subDao.findAllItemByID(taskId);
-			
+				List<Subtask> listOfItem1 = subDao.findAllItemStatus(taskId);
 				request.setAttribute("taskName",taskName);
 				request.setAttribute("listOfItem",listOfItem);
+				request.setAttribute("listOfItem1",listOfItem1);
 				RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
 				rd.forward(request, response);
 			} 

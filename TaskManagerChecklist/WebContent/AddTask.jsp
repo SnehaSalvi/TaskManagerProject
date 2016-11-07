@@ -23,7 +23,7 @@
 
 	$(function() 
 	{
-	    $( "#datepicker" ).datepicker();
+	    $( "#datepicker1" ).datepicker();
 	    $('#timepicker1').timepicker();
 
 	});
@@ -175,7 +175,7 @@ function clearContent()
 								<tr>
 									<td colspan="2">
 										<input type="label" id="label2" name="newdate" value="Date" size="6" readonly/>
-										<input type="text" name="mydate" class="tid" id="datepicker"/>
+										<input type="text" name="mydate" class="tid" id="datepicker1"/>
 									<!-- 	<input type="date" name="mydate" class="tid" required="required"/> -->
 									</td>
 								</tr>

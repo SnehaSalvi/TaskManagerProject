@@ -62,13 +62,22 @@
 	border: thick;
 	background-color: #abecef;
 	border-color: black;
-	width: 550px;
+	width: 350px;
 }
 #tableView1
 {
 	border: thick;
 	background-color: white;
 	border-color: black;
+}
+#tableView2
+{
+	border: thick;
+	background-color: #abecef;
+
+	border-color: black;
+		width: 250px;
+		
 }
 #create
 {
@@ -91,4 +100,11 @@
 	width:17px;
 	height:17px;
 	
+	
 }
+/* #check:checked + span
+{
+  text-decoration:line-through;
+
+} */
+
