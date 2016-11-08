@@ -17,6 +17,9 @@ public interface SubtaskDao
 	boolean addSubtask(Subtask  subtask)throws SQLException,IOException;
 	boolean updateSubtask(Subtask  subtask)throws SQLException,IOException;
 	boolean updateSubtaskStatus(Subtask  subtask)throws SQLException,IOException;
+	
+	public List<Subtask> findAllItemName(String name) throws SQLException;
+	
 	boolean deleteSubtask(Subtask  subtask)throws SQLException,IOException;
 	public void close();
 }

@@ -102,8 +102,13 @@
 											</td>
 											
 										</tr>
+										
 											</c:forEach> 
-											
+											<tr>
+											<td colspan="4" align="center">
+										<h5>	${message}</h5>
+											</td>
+											</tr>
 									</table>
 										</div>	
 								
@@ -111,8 +116,8 @@
 								</tr>
 							
 							<tr>
-											<td colspan="2">
-											
+											<td colspan="2" align="center">
+										<font color="red"><h5>	${status}</h5></font>
 											</td>
 											</tr>
 								
@@ -123,6 +128,6 @@
 			</td>
 		</tr>
 	</table>
-	
+
 </body>
 </html>

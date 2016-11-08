@@ -117,7 +117,7 @@ public class TaskServlet extends HttpServlet
 		                boolean result=taskDao.addTask(task);
 		                if(result)
 		                {
-		                	String message="Record Inserted Successfully!!!";
+		                	String message="Task Created!!!";
 		                	request.setAttribute("message", message);
 		                    request.getRequestDispatcher("HomeServlet").forward(request, response); 
 		                }

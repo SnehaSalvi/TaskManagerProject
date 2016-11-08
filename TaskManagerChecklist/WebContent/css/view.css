@@ -36,7 +36,7 @@
 #editBTN1
 {
 	height: 25px;
-    width: 75px;
+    width:10px;
     border-radius: 7px;
     border: 1px solid #000;
     font-family: sans-serif;
@@ -45,6 +45,7 @@
     font-size: 11px;
     border: 0;
 }
+
 #createBTN
 {
 	height: 25px;

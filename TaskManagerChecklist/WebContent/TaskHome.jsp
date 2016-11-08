@@ -105,7 +105,7 @@
 											</c:forEach> 
 											<tr>
 											<td colspan="4" align="center">
-											${message}
+											<font color="red"><h5>${message}</h5></font>
 											</td>
 											</tr>
 									</table>

@@ -34,11 +34,14 @@ public class SubtaskServlet extends HttpServlet
 	private static final String Select_Task_Name = "SELECT name FROM mytaskdatabase.task where id=?";
 	private static final String Delete_Subtask = "DELETE FROM mytaskdatabase.subtask where id=?";
 	private static final String UPDATE_Subtask_Status = "UPDATE mytaskdatabase.subtask SET status='Item Completed' where id=?";
-	
+	private static final String UPDATE_Subtask_Status1 = "UPDATE mytaskdatabase.subtask SET status='Item Scheduled' where id=?";
 	private static final String Select_Subtask_Count = "select count(id) from mytaskdatabase.subtask where taskid=?";
 	private static final String Select_Subtask_Status_Count = "select count(id) from mytaskdatabase.subtask where taskid=? and status='Item Scheduled'";
 	private static final String Select_Subtask_Status_Count1 = "select count(id) from mytaskdatabase.subtask where taskid=? and status='Item Completed'";
 	
+	private static final String Delete_Task = "DELETE FROM mytaskdatabase.task where id=?";
+	
+	private static final String Select_Task_Count = "select count(id) from mytaskdatabase.task";
 	//private static final String Get_SubtaskId = "SELECT id FROM mytaskdatabase.subtask where name=?";
 	private Connection conn;
     public SubtaskServlet() 
@@ -98,7 +101,7 @@ public class SubtaskServlet extends HttpServlet
 					pstmt.setString(2,status); 
 					pstmt.setInt(3,taskId);
 			        pstmt.executeUpdate();
-					String message="Record Inserted Successfully!!!";
+					String message="Add New Item!!!";
 					
 					
 							request.setAttribute("taskName", taskName);
@@ -176,6 +179,44 @@ public class SubtaskServlet extends HttpServlet
 	
 			
 		}
+		else if(button.equalsIgnoreCase("+"))
+		{
+			int subtaskID=Integer.parseInt(request.getParameter("subtaskId")); 
+			 SubtaskDao subDao=new SubtaskDaoImp();
+			try
+			{
+				pstmt = conn.prepareStatement(Select_Subtask);
+				
+				pstmt.setInt(1, subtaskID);
+				rs = pstmt.executeQuery();
+				rs.next();
+				taskId=rs.getInt(1);
+				pstmt = conn.prepareStatement(UPDATE_Subtask_Status1);
+				pstmt.setInt(1,subtaskID);
+				int result=pstmt.executeUpdate();
+				if(result>=1)
+				{
+					List<Subtask> listOfItem = subDao.findAllItemByID(taskId);
+					List<Subtask> listOfItem1 = subDao.findAllItemStatus(taskId);
+					request.setAttribute("taskName",taskName);
+					request.setAttribute("listOfItem",listOfItem);
+					request.setAttribute("listOfItem1",listOfItem1);
+					RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
+					rd.forward(request, response);
+				}
+				else
+				{
+					String message="Error!!!";
+					request.setAttribute("status", message);
+					request.getRequestDispatcher("ViewTask").forward(request, response);
+				}
+			}
+			catch (SQLException e) 
+			{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		}
 		else if(button.equalsIgnoreCase("Complete"))
 		{
 			int subtaskID=Integer.parseInt(request.getParameter("check1")); 
@@ -228,7 +269,7 @@ public class SubtaskServlet extends HttpServlet
 				else 
 				{
 					String message="Error!!!";
-					request.setAttribute("message", message);
+					request.setAttribute("status", message);
 					request.getRequestDispatcher("ViewTask").forward(request, response);
 				}
 			} 
@@ -398,7 +439,7 @@ public class SubtaskServlet extends HttpServlet
 					
 					List<Subtask> listOfItem = subDao.findAllItemByID(taskId);
 					List<Subtask> listOfItem1 = subDao.findAllItemStatus(taskId);
-					String message="Record Updated Successfully!!!";
+					String message="Item Updated Successfully!!!";
 					request.setAttribute("status", message);
 					request.setAttribute("taskName",taskName);
 					request.setAttribute("listOfItem",listOfItem);
@@ -419,6 +460,60 @@ public class SubtaskServlet extends HttpServlet
 				e.printStackTrace();
 			}
 					
+		}
+		else if(button.equalsIgnoreCase("Remove"))
+		{
+			try
+			{
+				pstmt = conn.prepareStatement(Delete_Task);
+				pstmt.setInt(1,Integer.parseInt(request.getParameter("check1")));
+				int result=pstmt.executeUpdate();
+				List listOfTask;
+				TaskDao taskDao=new TaskDaoImp();
+				if(result>=1)
+				{
+					pstmt = conn.prepareStatement(Select_Task_Count);
+					rs = pstmt.executeQuery();
+					rs.next();
+					int count=rs.getInt(1);
+					if(count<=0)
+					{
+						String message="No Item in a list";
+						String status="Task Removed Successfully!!!";
+						request.setAttribute("message", message);
+						request.setAttribute("status", status);
+						
+						RequestDispatcher rd = request.getRequestDispatcher("ViewAllTask.jsp");
+						rd.forward(request, response);
+								
+					}
+					else
+					{
+						listOfTask = taskDao.findAllTask();
+						
+						request.setAttribute("listOfTask", listOfTask);
+						
+						RequestDispatcher rd = request.getRequestDispatcher("ViewAllTask.jsp");
+						rd.forward(request, response);
+					}
+					
+					
+				
+				}
+				else
+				{
+					String message="Error!!!";
+					request.setAttribute("status", message);
+					request.getRequestDispatcher("ViewAll.jsp").forward(request, response); 
+				}
+				
+			}
+			catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		else if(button.equalsIgnoreCase("view"))
 		{

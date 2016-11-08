@@ -25,6 +25,9 @@ public class SubtaskDaoImp implements SubtaskDao
 	private static final String UPDATE_Subtask_Status = "UPDATE mytaskdatabase.subtask SET status='Item Completed' where id=?";
 	private static final String Delete_Subtask = "DELETE FROM mytaskdatabase.subtask where id=?";
 	private static final String GET_All_Task = "select name from mytaskdatabase.task t, mytaskdatabase.subtask s where t.id=s.taskid";
+
+	private static final String Select_Subtask_Name = "select s.name from mytaskdatabase.subtask t,mytaskdatabase.subtask s  where t.id=s.taskid and t.name=?";
+	
 	public SubtaskDaoImp() 
 	{
 		super();
@@ -191,6 +194,24 @@ public class SubtaskDaoImp implements SubtaskDao
 	                    return true;
 	                }
 	                return false;
+	}
+
+	@Override
+	public List<Subtask> findAllItemName(String name) throws SQLException
+	{
+		List<Subtask> listOfItem = new ArrayList<Subtask>();
+		PreparedStatement pstmt = conn.prepareStatement(Select_Subtask_Name);
+		pstmt.setString(1, name);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			
+			Subtask sub=new Subtask();
+		
+			sub.setName(rs.getString(1));
+			listOfItem.add(sub);
+		}
+		
+		return listOfItem;
 	}
 
 }

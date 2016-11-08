@@ -211,7 +211,7 @@ function clearContent()
 									</td>
 								</tr>
 								<tr>
-								<td  colspan="2"><input type="label" id="label3" name="message" value="${message}" size="6"/></td>
+								<td  colspan="2" align="center"><input type="label" id="label3" name="message" value="${message}" size="6"/></td>
 								</tr>
 							</table>
 						</td>

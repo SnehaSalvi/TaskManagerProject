@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.task.dto.Category;
-import com.task.dto.Task;
+
 
 public interface CategoryDao 
 {

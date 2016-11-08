@@ -122,6 +122,7 @@ function clearContent()
 								</tr>
 								<tr>
 									<td colspan="2">
+									<table><tr><td>
 									<div style="overflow:scroll;height:135px;width:100%;overflow:auto">
 										<table id="tableView2" align="center" cellspacing="0" cellpadding="7" width="250" bgcolor="#abecef">
 											<tr>
@@ -142,12 +143,16 @@ function clearContent()
 											</c:forEach> 
 											<tr>
 												<td colspan="2" align="center">
-													${message}
+													<font color="red">${message}</font>
 												</td>
 											
 											</tr>
 									</table>
 										</div>
+										</td>
+										</tr>
+										<tr>
+										<td>
 										<div style="overflow:scroll;height:110px;width:100%;overflow:auto">
 									<table id="tableView3" align="center" cellspacing="0" cellpadding="7" width="250" bgcolor="#abecef">
 										<hr>	
@@ -160,10 +165,19 @@ function clearContent()
 												<td colspan="2">
 													<s>${ item1.name }</s>
 												</td>
+												<td>
+												<form id="myform" action="SubtaskServlet" method="POST">		
+												
+											<input type="hidden" name="subtaskId" value="${item1.subtaskID}"/>
+										<%-- 	<input type="hidden" name="taskId" value="${item1.taskId}"/></td> --%>
+											<input type="submit" id="addbtn" width="2" height="2" name="button" value="+">
+											</form>
+												</td>
 											</tr>
 										</c:forEach>
 								</table>
 									</div> 
+									</td></tr></table>
 									</td>
 								</tr>
 								

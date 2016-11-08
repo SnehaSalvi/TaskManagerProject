@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="java.sql.*"%>
+    <%@page import="java.sql.*"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -11,21 +11,18 @@
 <title>Insert title here</title>
 <link href="css/home.css" type="text/css" rel="stylesheet"/>
 <link href="css/item.css" type="text/css" rel="stylesheet"/>
+<link href="css/view.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
-function clearContent()
+
+function RemoveAll()
 {
-	document.getElementById("label2").value="";   
-}
-function revert()
-{
-	var task=document.getElementById("select1").value;   
-	document.getElementById("select1").value=task;
+	document.getElementById('removeBTN').submit;
 }
 </script>
-
 </head>
 <body>
-<form action="SubtaskServlet" action="POST">
+<form action="SubtaskServlet" method="POST">
+<input type="hidden" name="taskname" value="${taskName}"/>
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -51,6 +48,7 @@ function revert()
 	<table>
 		<tr>
 			<td>
+			
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
@@ -78,56 +76,68 @@ function revert()
 				<table id="table3">
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
-							<table align="center" cellspacing="6" cellpadding="4">
-							<tr>
-								<td  colspan="3" align="center"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
-								</tr>
+						<table align="center" cellspacing="4" cellpadding="10">
 								<tr>
-									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Add Item" readonly/>
+									<td colspan="2" id="font1">
+										<input type="label" id="font1" name="label" value="Task List" readonly/>
 									</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<select id="select1" name="taskname" placeholder="Task" onfocus="clearContent()" required="required">
-										 <option value="">Please Select Task</option>
-											<c:forEach items="${ listOfTask }" var="task">
-												<option value="${ task.name }">${ task.name }</option> 
-											</c:forEach>
-										</select>
+									<table><tr><td>
+									<div style="overflow:scroll;height:135px;width:100%;overflow:auto">
+										<table id="tableView2" align="center" cellspacing="0" cellpadding="6" width="210" bgcolor="#abecef">
+											<tr>
+											<td align="left">	<input type="checkbox" id="check" name="check1" value="${taskId}" onfocus="clearContent()"/>	</td>
+												<td>
+												<h4> ${taskName}</h4>
+												</td>
+											</tr>
+											<c:forEach items="${ listOfItem }" var="item">
+											<tr>
+											<td colspan="2">
+											
+												*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ item.name }
+											</td>
+													
+											</tr>
+													
+											</c:forEach> 
+											<tr>
+												<td colspan="2" align="center">
+													<font color="red">${message}</font>
+												</td>
+											
+											</tr>
+									</table>
+										</div>
+										</td>
+										</tr>
+										</table>
 									</td>
-									<td>&nbsp;</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input type="text" name="itemname" size="30" placeholder="Name" required="required"/>
-									</td>
-									<td>&nbsp;</td>
 								</tr>
 								
-								<!-- <tr>
-									<td colspan="2">
-										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
-									</td>
-									<td>&nbsp;</td>
-								</tr> -->
 								<tr>
-									<td colspan="2">
-										
-									</td>
-									<td>
-										<input type="submit" id="button1" name="button" value="Add More" onclick="revert()"/>&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" id="button1" name="button" value="Done"/>
+									<td colspan="2" align="right">
+										<input type="submit" id="removeBTN" name="button" value="Remove" onclick="RemoveAll()" onfocus="clearContent()"/>
 									</td>
 								</tr>
+								<tr>
+								<td  colspan="2" align="center">
+								<br/><input type="label" id="label2" name="message" value="${status}" size="6"/>
+								</td>
+								</tr>
 								
-							</table>
+								
+								
+						</table>
 						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-</form>
+	</form>
 </body>
 </html>

@@ -79,6 +79,9 @@ function revert()
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
 							<table align="center" cellspacing="6" cellpadding="4">
+							<tr>
+								<td  colspan="3" align="center"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
+								</tr>
 								<tr>
 									<td colspan="2">
 										<input type="label" id="font1" name="label" value="Add Item" readonly/>
@@ -116,9 +119,7 @@ function revert()
 										<input type="submit" id="button1" name="button" value="Add More" onclick="revert()"/>&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" id="button1" name="button" value="Done"/>
 									</td>
 								</tr>
-								<tr>
-								<td  colspan="3"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
-								</tr>
+								
 							</table>
 						</td>
 					</tr>
