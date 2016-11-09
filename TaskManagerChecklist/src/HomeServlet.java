@@ -39,12 +39,13 @@ public class HomeServlet extends HttpServlet
 	private static final String Delete_Subtask = "DELETE FROM mytaskdatabase.subtask where id=?";
 	private static final String Select_Cat_ID = "SELECT categoryid FROM mytaskdatabase.task where id=?";
 	private static final String Select_Task_ID = "SELECT id FROM mytaskdatabase.task where categoryid=2";
-	
 	private static final String Select_Subtask_Name = "select s.name from mytaskdatabase.subtask t,mytaskdatabase.subtask s  where t.id=s.taskid and t.name=?";
+	private static final String Select_Task_Count = "select count(id) from mytaskdatabase.task";
+	private static final String Select_TaskId = "SELECT id FROM mytaskdatabase.task";
 	
 	private static final String Select_Subtask_Count = "select count(id) from mytaskdatabase.subtask where taskid=?";
 	private static final String Update_Task_Status="UPDATE mytaskdatabase.task SET reminder=?,status=? where id=?";
-	private static final String Select_Task_Count = "select count(id) from mytaskdatabase.task";
+	
 	private static final String Select_Subtask_Status_Count = "select count(id) from mytaskdatabase.subtask where taskid=? and status='Item Scheduled'";
 	private Connection conn;  
     public HomeServlet() 
@@ -79,40 +80,8 @@ public class HomeServlet extends HttpServlet
 		CategoryDao categoryDao=null;
 		TaskDao taskDao=null;
 		
-		if(button_action.equalsIgnoreCase("1"))
-		{
-			taskDao=new TaskDaoImp();
-			
-			List listOfTask;
-			try {
-				PreparedStatement pstmt = conn.prepareStatement(Select_Task_Count);
-				ResultSet rs = pstmt.executeQuery();
-				rs.next();
-				int count=rs.getInt(1);
-				if(count<=0)
-				{
-					String message="No Item in a list";
-					request.setAttribute("message", message);
-					
-					RequestDispatcher rd = request.getRequestDispatcher("TaskHome.jsp");
-					rd.forward(request, response);
-							
-				}
-				else
-				{
-					listOfTask = taskDao.findAllTask();
-					
-					request.setAttribute("listOfTask", listOfTask);
-					
-					RequestDispatcher rd = request.getRequestDispatcher("TaskHome.jsp");
-					rd.forward(request, response);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else if(button_action.equalsIgnoreCase("6") || button_action.equalsIgnoreCase("Done"))
+		
+		if(button_action.equalsIgnoreCase("6") || button_action.equalsIgnoreCase("Done"))
 		{
 		try {
 				categoryDao=new CategoryDaoImp();
@@ -159,7 +128,7 @@ public class HomeServlet extends HttpServlet
 		}
 		else if(button_action.equalsIgnoreCase("3"))
 		{
-taskDao=new TaskDaoImp();
+			taskDao=new TaskDaoImp();
 			
 			List listOfTask;
 			try {
@@ -169,7 +138,7 @@ taskDao=new TaskDaoImp();
 				int count=rs.getInt(1);
 				if(count<=0)
 				{
-					String message="No Item in a list";
+					String message="No Task Available";
 					request.setAttribute("message", message);
 					
 					RequestDispatcher rd = request.getRequestDispatcher("ViewAllTask.jsp");
@@ -192,6 +161,39 @@ taskDao=new TaskDaoImp();
 			
 				
 			
+		}
+		else if(button_action.equalsIgnoreCase("11"))
+		{
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<Integer> taskId;
+			List<Subtask> listOfItem=null;
+			List<Integer> listOfId=null;
+			try
+			{
+				pstmt = conn.prepareStatement(Select_TaskId);
+				rs = pstmt.executeQuery();
+				while(rs.next())
+				{
+					
+				System.out.println("taskId: "+rs.getInt(1));
+				listOfId=new ArrayList<Integer>();
+				listOfId.add(rs.getInt(1));
+				//	SubtaskDao subDao=new SubtaskDaoImp();
+				//	listOfItem = subDao.findAllItemByID(rs.getInt(1));
+				//	List<Subtask> listOfItem1 = subDao.findAllItemStatus(rs.getInt(1));
+					
+					
+				}
+				request.setAttribute("listOfId", listOfId);
+				RequestDispatcher rd = request.getRequestDispatcher("ListView.jsp");
+				rd.forward(request, response);
+			}
+			catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if(button_action.equalsIgnoreCase("7"))
 		{

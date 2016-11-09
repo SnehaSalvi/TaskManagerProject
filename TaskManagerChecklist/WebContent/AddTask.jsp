@@ -71,7 +71,7 @@ function clearContent()
 </head>
 <body>
 <input type="hidden" >
-<form name="TaskForm" action="TaskServlet" method="POST">
+<form name="TaskForm" action="Task" method="POST">
 <input type="hidden" name="someField" id="someFieldId" />
 	<table id="table1">
 		<tr>
@@ -103,7 +103,7 @@ function clearContent()
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=1"><input type="button" name="button" id="button2" value="Task"/></a>
+							<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>

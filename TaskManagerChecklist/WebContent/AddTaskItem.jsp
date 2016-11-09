@@ -25,7 +25,7 @@ function revert()
 </script>
 </head>
 <body>
-<form action="SubtaskServlet" action="POST">
+<form action="SubtaskServlet" method="POST">
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -54,7 +54,7 @@ function revert()
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=1"><input type="button" name="button" id="button2" value="Task"/></a>
+							<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>

@@ -34,6 +34,7 @@ public class TaskServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	private static final String Get_CategoryId = "SELECT id FROM mytaskdatabase.category where name=?";
+	private static final String Select_Task_Count = "select count(id) from mytaskdatabase.task";
 	private Connection conn;
     public TaskServlet() 
     {
@@ -42,9 +43,44 @@ public class TaskServlet extends HttpServlet
     }
     
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		
 		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		CategoryDao categoryDao=null;
+		TaskDao taskDao=null;
+		
+		taskDao=new TaskDaoImp();
+			
+			List listOfTask;
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(Select_Task_Count);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				int count=rs.getInt(1);
+				if(count<=0)
+				{
+					String message="No Task Available";
+					request.setAttribute("message", message);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("TaskHome.jsp");
+					rd.forward(request, response);
+							
+				}
+				else
+				{
+					listOfTask = taskDao.findAllTask();
+					
+					request.setAttribute("listOfTask", listOfTask);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("TaskHome.jsp");
+					rd.forward(request, response);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		//doPost(req, resp);
 	}
 
 	public void init(ServletConfig config) throws ServletException 
