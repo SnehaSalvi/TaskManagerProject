@@ -137,11 +137,28 @@ public class TaskServlet extends HttpServlet
 			if(button_action.equalsIgnoreCase("Add"))
 			{
 				
-				
-				request.setAttribute("taskName", request.getParameter("taskname"));
-				request.setAttribute("taskId", request.getParameter("taskId"));
-				RequestDispatcher rd = request.getRequestDispatcher("/AddTaskItem.jsp");
-				rd.forward(request, response);
+				try {
+					pstmt = conn.prepareStatement(Select_Task_Name);
+					pstmt.setInt(1, Integer.parseInt(request.getParameter("taskId")));
+					rs = pstmt.executeQuery();
+					rs.next();
+					String taskName=rs.getString(1);
+					System.out.println("TASKNAME:"+request.getParameter("taskname")+"/t"+Integer.parseInt(request.getParameter("taskId")));
+					request.setAttribute("taskName",taskName);
+
+					request.setAttribute("taskId", Integer.parseInt(request.getParameter("taskId")));
+					
+					
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/AddTaskItem.jsp");
+					rd.forward(request, response);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else if(button_action.equalsIgnoreCase("createTask"))
 			{
@@ -456,6 +473,7 @@ public class TaskServlet extends HttpServlet
 	    					request.setAttribute("message", message);
 							request.setAttribute("taskName",taskName);
 							request.setAttribute("listOfItem1",listOfItem1);
+							request.setAttribute("taskId",Integer.parseInt(request.getParameter("taskId")));
 							request.setAttribute("date",date);
 							request.setAttribute("time",time);
 							RequestDispatcher rd = request.getRequestDispatcher("/ViewTask.jsp");

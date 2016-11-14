@@ -197,12 +197,12 @@ function clearContent()
 																	<tr>
 																		<td colspan="2"><s>${ item1.name }</s></td>
 																		<td>
-																			<form id="myform" name="myView1" action="" method="POST">
-																			
+																			<form id="myform" name="myView1" action="../Task/${item1.taskId}" method="POST">
+																				<input type="hidden" name="taskId" value="${item1.taskId}" />
 																				<input type="hidden" name="subtaskId"
 																					value="${item1.subtaskID}" />
 																				<%-- 	<input type="hidden" name="taskId" value="${item1.taskId}"/></td> --%>
-																				<input type="button" id="addbtn" width="2"
+																				<input type="submit" id="addbtn" width="2"
 																					height="2" name="button" value="+" onClick="submitFunction1(1)">
 																			</form>
 																		</td>
