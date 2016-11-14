@@ -8,7 +8,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 <body>
-<form action="HomeServlet" method="POST">
+<form  name="HomeForm" action="HomeServlet" method="POST">
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -37,17 +37,17 @@
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" name="button" id="button2" value="Item"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=3"><input type="button" name="button" id="button2" value="View"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
 						</td>
 					</tr>
 					<tr>

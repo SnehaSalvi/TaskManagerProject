@@ -31,7 +31,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>TaskServlet</servlet-name>
-    <url-pattern>/Task</url-pattern>
+    <url-pattern>/Task/*</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SubtaskServlet</servlet-name>
@@ -39,7 +39,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SubtaskServlet</servlet-name>
-    <url-pattern>/SubtaskServlet</url-pattern>
+    <url-pattern>/Item/*</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>ViewServlet</servlet-name>
@@ -47,6 +47,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ViewServlet</servlet-name>
-    <url-pattern>/TaskView</url-pattern>
+    <url-pattern>/Tasks/*</url-pattern>
   </servlet-mapping>
 </web-app>

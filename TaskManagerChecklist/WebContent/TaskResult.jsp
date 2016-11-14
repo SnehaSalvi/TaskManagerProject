@@ -14,7 +14,7 @@
 <link href="css/view.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<form action="SubtaskServlet" method="POST">
+<form action="Item" method="POST">
 <input type="hidden" name="taskname" value="${taskName}"/>
 	<table id="table1">
 		<tr>
@@ -45,17 +45,17 @@
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" name="button" id="button2" value="Item"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=3"><input type="button" name="button" id="button2" value="View"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
 						</td>
 					</tr>
 					<tr>

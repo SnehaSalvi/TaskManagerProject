@@ -46,19 +46,19 @@
 			<td>
 			
 				<table id="table2" border="1">
-					<tr>
+				<tr>
 						<td id="#td5" align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" name="button" id="button2" value="Item"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=3"><input type="button" name="button" id="button2" value="View"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
 						</td>
 					</tr>
 					<tr>
@@ -94,7 +94,7 @@
 												${task.name }
 												 </td>
 											<td align="right" bgcolor="#abecef" width="70">
-											<form id="myform" action="HomeServlet" method="POST">		
+											<form id="myform" action="Task/${task.taskId}" method="POST">		
 												
 											<input type="hidden" name="taskId" value="${task.taskId}"/>
 											<input type="submit" id="editBTN" name="button" value="View Item">
@@ -106,7 +106,7 @@
 											</c:forEach> 
 											<tr>
 											<td colspan="4" align="center">
-										<h5>	${message}</h5>
+										<h5>	<font color="red">${message}</font></h5>
 											</td>
 											</tr>
 									</table>

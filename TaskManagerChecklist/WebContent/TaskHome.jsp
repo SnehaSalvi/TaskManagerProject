@@ -14,7 +14,12 @@
 <link href="css/view.css" type="text/css" rel="stylesheet"/>
 <link href="css/taskview.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
-
+function button1()
+{
+    document.form1.ACTION = "option1.jsp"
+    	document.form1.METHOD = "POST"
+    form1.submit()
+}
 
 </script>
 </head>
@@ -48,17 +53,17 @@
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" name="button" id="button2" value="Item"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=3"><input type="button" name="button" id="button2" value="View"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
 						</td>
 					</tr>
 					<tr>
@@ -94,7 +99,7 @@
 												${task.name }
 												 </td>
 											<td align="right" bgcolor="#abecef" width="70">
-											<form id="myform" action="HomeServlet" method="POST">		
+											<form id="myform" action="Task/${task.taskId}" method="POST">		
 												
 											<input type="hidden" name="taskId" value="${task.taskId}"/>
 											<input type="submit" id="editBTN" width="25" name="button" value="Add Item">
@@ -113,14 +118,19 @@
 								
 									</td>
 								</tr>
-							
-							<tr>
-											<td colspan="2" align="right">
-												<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=6"><input type="button" name="button" id="createBTN1" value="Create New Task"/></a>
+								
+								</table>
+								<form action="Task/new" method="POST">
+								<input type="hidden" name="button" value="createTask"/>
+							<table align="right">
+							<tr><td>&nbsp;</td>
+											<td align="left">
+												<!-- <a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=6"> --><input type="submit" name="button" id="createBTN1" value="Create New Task" /><!-- </a> -->
 											</td>
 											</tr>
 								
 						</table>
+						</form>
 						</td>
 					</tr>
 				</table>

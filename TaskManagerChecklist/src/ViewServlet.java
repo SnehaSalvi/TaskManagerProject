@@ -30,7 +30,8 @@ public class ViewServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	private static final String Get_TaskId = "SELECT id FROM mytaskdatabase.task where name=?";
-
+	private static final String Select_Task_Count = "select count(id) from mytaskdatabase.task";
+	private static final String Delete_Task = "DELETE FROM mytaskdatabase.task where id=?";
 	private Connection conn;
     public ViewServlet() 
     {
@@ -51,6 +52,40 @@ public class ViewServlet extends HttpServlet
 	{
 		//String button_action=request.getParameter("id");
 		//System.out.println(button_action);
+	
+			TaskDao taskDao=new TaskDaoImp();
+			
+			List listOfTask;
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(Select_Task_Count);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				int count=rs.getInt(1);
+				if(count<=0)
+				{
+					String message="No Task Available";
+					request.setAttribute("message", message);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/ViewAllTask.jsp");
+					rd.forward(request, response);
+							
+				}
+				else
+				{
+					listOfTask = taskDao.findAllTask();
+					
+					request.setAttribute("listOfTask", listOfTask);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/ViewAllTask.jsp");
+					rd.forward(request, response);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+				
+			
 		
 		
 		//doPost(request, response);
@@ -59,7 +94,9 @@ public class ViewServlet extends HttpServlet
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String taskName=request.getParameter("taskname");
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		/*String taskName=request.getParameter("taskname");
 		String button=request.getParameter("button");
 		int taskId;
 		PreparedStatement pstmt=null;
@@ -94,7 +131,63 @@ public class ViewServlet extends HttpServlet
 				e.printStackTrace();
 			}
 		}
+	*/
 		
+		try
+		{
+			pstmt = conn.prepareStatement(Delete_Task);
+			pstmt.setInt(1,Integer.parseInt(request.getParameter("check1")));
+			int result=pstmt.executeUpdate();
+			List listOfTask;
+			TaskDao taskDao=new TaskDaoImp();
+			if(result>=1)
+			{
+				pstmt = conn.prepareStatement(Select_Task_Count);
+				rs = pstmt.executeQuery();
+				rs.next();
+				int count=rs.getInt(1);
+				if(count<=0)
+				{
+					String message="No Item in a list";
+					String status="Task Removed Successfully!!!";
+					request.setAttribute("message", message);
+					request.setAttribute("status", status);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/ViewAllTask.jsp");
+					rd.forward(request, response);
+							
+				}
+				else
+				{
+					listOfTask = taskDao.findAllTask();
+					
+					request.setAttribute("listOfTask", listOfTask);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/ViewAllTask.jsp");
+					rd.forward(request, response);
+				}
+				
+				
+			
+			}
+			else
+			{
+				String message="Error!!!";
+				request.setAttribute("status", message);
+				request.getRequestDispatcher("/ViewAll.jsp").forward(request, response); 
+			}
+			
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+			
+		
+	
 	}
 
 }

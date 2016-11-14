@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="java.sql.*"%>
+     <%@page import="java.sql.*"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -9,9 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link href="../../../css/home.css" type="text/css" rel="stylesheet"/>
-<link href="../../../css/item.css" type="text/css" rel="stylesheet"/>
-<link href="../../../css/taskview.css" type="text/css" rel="stylesheet"/>
+<link href="../css/home.css" type="text/css" rel="stylesheet"/>
+<link href="../css/item.css" type="text/css" rel="stylesheet"/>
+<link href="../css/taskview.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
 function clearContent()
 {
@@ -26,12 +26,12 @@ function submitFunction(i) {
 	   if (i==1) 
 		   {
 		    
-		   document.myView.action="../../../Task/${taskId}/Item/new";
+		   document.myView.action="../Item/new";
 		   document.getElementById('Btn').value = "Add More";
 		   }
 	   if (i==2)  {
 		    
-		   document.myView.action="../../../Task/${taskId}";
+		   document.myView.action="../Item/list";
 		   document.getElementById('Btn').value = "Done.";
 		   }
 	  
@@ -46,7 +46,7 @@ function submitFunction(i) {
 	<table id="table1">
 		<tr>
 			<td id="td1">
-				<img id="banner" src="../../../images/banner.jpg"/>
+				<img id="banner" src="../images/banner.jpg"/>
 			</td>
 			<td id="td_blank">
 			</td>
@@ -54,13 +54,13 @@ function submitFunction(i) {
 				Task Manager
 			</td>
 			<td id="td4" align="center">
-				<a href="Home.jsp"><img id="list1" src="../../../images/HomePic.png"/></a>
+				<a href="Home.jsp"><img id="list1" src="../images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
 			</td>
 			<td id="td4" align="center">
-				<img id="list" src="../../../images/list.png"/>
+				<img id="list" src="../images/list.png"/>
 			</td>
 		</tr>
 	</table>
@@ -86,7 +86,7 @@ function submitFunction(i) {
 					</tr>
 					<tr>
 						<td rowspan="7" align="center">
-							<img id="img1" src="../../../images/menu.jpg"/>
+							<img id="img1" src="../images/menu.jpg"/>
 						</td>
 					</tr>
 				</table>

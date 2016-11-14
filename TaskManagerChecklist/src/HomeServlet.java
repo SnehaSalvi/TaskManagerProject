@@ -263,6 +263,29 @@ public class HomeServlet extends HttpServlet
 				categoryDao.close();
 			}
 		}
+		if(button_action.equalsIgnoreCase("6") || button_action.equalsIgnoreCase("Done"))
+		{
+		try {
+				categoryDao=new CategoryDaoImp();
+				List<Category> listOfCategory = categoryDao.findAllCategory();
+				System.out.println("size"+listOfCategory.size());
+				//String message="Record Inserted Successfully!!!";
+				request.setAttribute("listOfCategory",listOfCategory);
+				//request.setAttribute("message",message);
+				RequestDispatcher rd = request.getRequestDispatcher("AddTask.jsp");
+				rd.forward(request, response);
+				
+			} 
+			catch (SQLException e) 
+			{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+			finally
+			{
+				categoryDao.close();
+			}
+		}
 		else if(button_action.equalsIgnoreCase("Add") || button_action.equalsIgnoreCase("Add More"))
 		{
 			taskDao=new TaskDaoImp();

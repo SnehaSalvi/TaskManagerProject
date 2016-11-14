@@ -10,8 +10,8 @@
 <script src="${pageContext.request.contextPath}/scripts/jquery.min.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link href="css/home.css" type="text/css" rel="stylesheet"/>
-<link href="css/task.css" type="text/css" rel="stylesheet"/>
+<link href="../css/home.css" type="text/css" rel="stylesheet"/>
+<link href="../css/task.css" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -28,7 +28,7 @@
 
 	});
 	
-function makeDisable()
+/* function makeDisable()
 {
     var x=document.getElementById("select1")
     x.disabled=true
@@ -36,8 +36,8 @@ function makeDisable()
 	var d=document.getElementById("newCatT");
 	d.innerHTML+="<p><input type='text' name='categoryname1' placeholder='Category' required='required'>";
 	
-	/*  var d=document.getElementById("newCatT1");
-	 d.innerHTML+="<p><input type='button' name='addcat' value='Add' onclick='setValue()'>"; */
+	 var d=document.getElementById("newCatT1");
+	 d.innerHTML+="<p><input type='button' name='addcat' value='Add' onclick='setValue()'>"; 
 	 var action = true;
 		document.getElementById("someFieldId").value = action;
 
@@ -50,6 +50,7 @@ function makeDisable()
  
 	
 }
+*/
 
 function clearContent()
 {
@@ -71,12 +72,12 @@ function clearContent()
 </head>
 <body>
 <input type="hidden" >
-<form name="TaskForm" action="Task" method="POST">
+<form name="TaskForm" action="../Task/new" method="POST">
 <input type="hidden" name="someField" id="someFieldId" />
 	<table id="table1">
 		<tr>
 			<td id="td1">
-				<img id="banner" src="images/banner.jpg"/>
+				<img id="banner" src="../images/banner.jpg"/>
 			</td>
 			<td id="td_blank">
 			</td>
@@ -84,13 +85,13 @@ function clearContent()
 				Task Manager
 			</td>
 			<td id="td4" align="center">
-				<a href="Home.jsp"><img id="list1" src="images/HomePic.png"/></a>
+				<a href="../Home.jsp"><img id="list1" src="../images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
 			</td>
 			<td id="td4" align="center">
-				<img id="list" src="images/list.png"/>
+				<img id="list" src="../images/list.png"/>
 			</td>
 		</tr>
 	</table>
@@ -103,22 +104,22 @@ function clearContent()
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=2"><input type="button" name="button" id="button2" value="Item"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=3"><input type="button" name="button" id="button2" value="View"/></a>
+						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
 						</td>
 					</tr>
 					<tr>
 						<td rowspan="7" align="center">
-							<img id="img1" src="images/menu.jpg"/>
+							<img id="img1" src="../images/menu.jpg"/>
 						</td>
 					</tr>
 				</table>
