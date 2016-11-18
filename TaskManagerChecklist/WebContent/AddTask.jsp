@@ -12,13 +12,15 @@
 <title>Insert title here</title>
 <link href="../css/home.css" type="text/css" rel="stylesheet"/>
 <link href="../css/task.css" type="text/css" rel="stylesheet"/>
+<link href="../css/view.css" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 	  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 	  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script src="${pageContext.request.contextPath}/scripts/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script type="text/javascript">
 
 	$(function() 
@@ -27,7 +29,31 @@
 	    $('#timepicker1').timepicker();
 
 	});
-	
+	function submitFunction(i) 
+	{
+		   if (i==1) 
+			   {
+			    
+			   document.myView.action="../Tasks";
+			   document.getElementById('Btn').value = "Done";
+			   }
+		   if (i==3)  {
+			    
+			   document.myView.action="../Tasks";
+			   document.getElementById('Btn').value = "Taskview";
+			   }
+		   if (i==4)  {
+			    
+			   document.myView.action="../Item/new";
+			   document.getElementById('Btn').value = "ItemNew";
+			   }
+		   if (i==5)  {
+			    
+			   document.myView.action="../Tasks";
+			   document.getElementById('Btn').value = "TasksList";
+			   }
+		   document.myView.submit()
+		   }
 /* function makeDisable()
 {
     var x=document.getElementById("select1")
@@ -67,12 +93,14 @@ function clearContent()
 
  }
 </style>
-<script src="${pageContext.request.contextPath}/scripts/jquery.min.js" type="text/javascript"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
+
 </head>
 <body>
 <input type="hidden" >
-<form name="TaskForm" action="../Task/new" method="POST">
+<form name="myView" action="" method="POST">
+<input type="hidden" id="Btn" name="button" value=""/>
 <input type="hidden" name="someField" id="someFieldId" />
 	<table id="table1">
 		<tr>
@@ -102,19 +130,34 @@ function clearContent()
 			<td>
 			
 				<table id="table2" border="1">
-					<tr>
+				<tr>
 						<td id="#td5" align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+							<input type="button" name="button" id="button2" value="Task" onClick="submitFunction(3)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
+							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
+							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(5)"/>
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<table id="setTb">
+								<tr>
+									<td id="setting" >Settings</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+									
+								</tr>
+							</table>
 						</td>
 					</tr>
 					<tr>
@@ -208,7 +251,7 @@ function clearContent()
 										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
 									</td>
 									<td>
-										<input type="submit" name="button" id="button1" value="Done" placeholder="Done"/>
+										<input type="button" name="button" id="button1" value="Done" placeholder="Done" onClick="submitFunction(1)"/>
 									</td>
 								</tr>
 								<tr>

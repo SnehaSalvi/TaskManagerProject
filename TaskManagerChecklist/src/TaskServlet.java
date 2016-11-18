@@ -39,7 +39,7 @@ public class TaskServlet extends HttpServlet
 	private static final String UPDATE_Subtask_Status = "UPDATE mytaskdatabase.subtask SET status='Item Completed' where id=?";
 	private static final String Update_Task_Status="UPDATE mytaskdatabase.task SET reminder=?,status=? where id=?";
 	private static final String Get_TaskId = "SELECT id FROM mytaskdatabase.task where name=?";
-	private static final String Get_CategoryId = "SELECT id FROM mytaskdatabase.category where name=?";
+	
 	private static final String Select_Task_Count = "select count(id) from mytaskdatabase.task";
 	private static final String Select_Task_Name = "SELECT name FROM mytaskdatabase.task where id=?";
 	private static final String UPDATE_Subtask_Status1 = "UPDATE mytaskdatabase.subtask SET status='Item Scheduled' where id=?";
@@ -259,6 +259,7 @@ public class TaskServlet extends HttpServlet
 					taskDao.close();
 				}
 			}
+		
 			else if(button_action.equalsIgnoreCase("Add More"))
 			{
 			try {
@@ -754,80 +755,7 @@ public class TaskServlet extends HttpServlet
 				}
 						
 			}
-			else if(button_action.equalsIgnoreCase("Done"))
-			{
-				System.out.println("action:"+button_action);
-			try {
-					pstmt = conn.prepareStatement(Get_CategoryId);
-					pstmt.setString(1, categoryName);
-			
-					rs = pstmt.executeQuery();
-					rs.next();
-					categoryId=rs.getInt(1);
-					
-					Task task=new Task();
-					task.setCategoryId(categoryId);
-					task.setName(request.getParameter("taskname"));
-					Date date1;
-					String date3 = null;
-					
-					
-					 try 
-					 {
-						date1 = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("mydate"));
-					
-						task.setDate(date1);
-					 } catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-		            
-					
-					task.setTime(request.getParameter("time"));
-		            task.setReminder(Integer.parseInt(request.getParameter("reminder")));
-		            task.setStatus(status);
-		            task.setDescription(request.getParameter("description"));
-		            
-		            TaskDao taskDao=new TaskDaoImp();
-		            try
-		            {
-		                boolean result=taskDao.addTask(task);
-		                if(result)
-		                {
-		                	String message="Task Created!!!";
-		                
-		                	categoryDao=new CategoryDaoImp();
-		    				List<Category> listOfCategory = categoryDao.findAllCategory();
-		    				System.out.println("size"+listOfCategory.size());
-		    				//String message="Record Inserted Successfully!!!";
-		    				request.setAttribute("listOfCategory",listOfCategory);
-		    				//request.setAttribute("message",message);
-		    				request.setAttribute("message", message);
-		    				RequestDispatcher rd = request.getRequestDispatcher("/AddTask.jsp");
-		    				rd.forward(request, response);
-		                }
-		                else
-		                {
-		                	String message="Error!!!";
-		                	request.setAttribute("message", message);
-		                      request.getRequestDispatcher("HomeServlet").forward(request, response); 
-		                }
-		                        
-				} 
-				catch (SQLException e1) 
-				{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				}
-		      
-            }
-            catch (SQLException e) 
-			{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
-			}
-		}
+	}
 		/*if(button_action.equalsIgnoreCase("Done"))
 		{
 				Category category=new Category();

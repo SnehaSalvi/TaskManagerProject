@@ -12,9 +12,38 @@
 <link href="../../../css/home.css" type="text/css" rel="stylesheet"/>
 <link href="../../../css/item.css" type="text/css" rel="stylesheet"/>
 <link href="../../../css/taskview.css" type="text/css" rel="stylesheet"/>
+<link href="../../../css/view.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript">
+function submitFunction(i) 
+{
+	   if (i==1) 
+		   {
+		    
+		   document.myView.action="../../../Task/${taskId}";
+		   document.getElementById('Btn').value = "Update";
+		   }
+	   if (i==3)  {
+		    
+		   document.myView.action="../../../Tasks";
+		   document.getElementById('Btn').value = "Taskview";
+		   }
+	   if (i==4)  {
+		    
+		   document.myView.action="../../../Item/new";
+		   document.getElementById('Btn').value = "ItemNew";
+		   }
+	   if (i==5)  {
+		    
+		   document.myView.action="../../../Tasks";
+		   document.getElementById('Btn').value = "TasksList";
+		   }
+	   document.myView.submit()
+	   }
+</script>
 </head>
 <body>
-<form action="../../../Task/${taskId}" method="POST">
+<form name="myView" action="" method="POST">
+<input type="hidden" id="Btn" name="button" value=""/>
 <input type="hidden" name="subId" id="subId" value="${subId}" />
 <input type="hidden" name="taskId" id="subId" value="${taskId}" />
 	<table id="table1">
@@ -43,19 +72,34 @@
 		<tr>
 			<td>
 				<table id="table2" border="1">
-					<tr>
+						<tr>
 						<td id="#td5" align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+							<input type="button" name="button" id="button2" value="Task" onClick="submitFunction(3)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
+							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
+							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(5)"/>
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<table id="setTb">
+								<tr>
+									<td id="setting" >Settings</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+									
+								</tr>
+							</table>
 						</td>
 					</tr>
 					<tr>
@@ -100,7 +144,7 @@
 										
 									</td>
 									<td>
-										<input type="submit" id="button1" name="button" value="Update"/>
+										<input type="button" id="button1" name="button" value="Update" onClick="submitFunction(1)"/>
 									</td>
 								</tr>
 								<%-- <tr>

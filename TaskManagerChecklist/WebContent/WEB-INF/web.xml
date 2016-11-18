@@ -49,4 +49,12 @@
     <servlet-name>ViewServlet</servlet-name>
     <url-pattern>/Tasks/*</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>CategoryServlet</servlet-name>
+    <servlet-class>CategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoryServlet</servlet-name>
+    <url-pattern>/Category/*</url-pattern>
+  </servlet-mapping>
 </web-app>

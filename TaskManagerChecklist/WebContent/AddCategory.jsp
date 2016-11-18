@@ -12,14 +12,15 @@
 <link href="../css/home.css" type="text/css" rel="stylesheet"/>
 <link href="../css/item.css" type="text/css" rel="stylesheet"/>
 <link href="../css/view.css" type="text/css" rel="stylesheet"/>
+<link href="../css/viewItem.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
 function submitFunction(i) 
 {
 	   if (i==1) 
 		   {
 		    
-		   document.myView.action="../Tasks";
-		   document.getElementById('Btn').value = "Remove";
+		   document.myView.action="../Category/new";
+		   document.getElementById('Btn').value = "Add More";
 		   }
 	   if (i==3)  {
 		    
@@ -38,13 +39,12 @@ function submitFunction(i)
 		   }
 	   document.myView.submit()
 	   }
-
 </script>
 </head>
 <body>
 <form name="myView" action="" method="POST">
 <input type="hidden" id="Btn" name="button" value=""/>
-<input type="hidden" name="taskname" value="${taskName}"/>
+<input type="hidden" name="taskId" value="${taskId}" />
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -56,7 +56,7 @@ function submitFunction(i)
 				Task Manager
 			</td>
 			<td id="td4" align="center">
-				<a href="Home.jsp"><img id="list1" src="../images/HomePic.png"/></a>
+				<a href="../Home.jsp"><img id="list1" src="../images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
@@ -70,9 +70,8 @@ function submitFunction(i)
 	<table>
 		<tr>
 			<td>
-			
 				<table id="table2" border="1">
-				<tr>
+					<tr>
 						<td id="#td5" align="center">
 							<input type="button" name="button" id="button2" value="Task" onClick="submitFunction(3)"/>
 						</td>
@@ -91,7 +90,7 @@ function submitFunction(i)
 						<td >
 							<table id="setTb">
 								<tr>
-									<td id="setting" >Settings</td>
+									<td id="setting">Settings</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
@@ -113,68 +112,50 @@ function submitFunction(i)
 				<table id="table3">
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
-						<table align="center" cellspacing="4" cellpadding="10">
-								<tr>
-									<td colspan="2" id="font1">
-										<input type="label" id="font1" name="label" value="Task List" readonly/>
-									</td>
-									<td>&nbsp;</td>
+							<table align="center" cellspacing="6" cellpadding="4">
+							<tr>
+								<td  colspan="3" align="center"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
 								</tr>
 								<tr>
 									<td colspan="2">
-									<table><tr><td>
-									<div style="overflow:scroll;height:135px;width:100%;overflow:auto">
-										<table id="tableView2" align="center" cellspacing="0" cellpadding="6" width="210" bgcolor="#abecef">
-											<tr>
-											<td align="left" bgcolor="#099aa2">	<input type="checkbox" id="check" name="check1" value="${taskId}" onfocus="clearContent()"/>	</td>
-												<td bgcolor="#099aa2">
-												<h4> ${taskName}</h4>
-												</td>
-											</tr>
-											<c:forEach items="${ listOfItem }" var="item">
-											<tr>
-											<td colspan="2">
-											
-												*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ item.name }
-											</td>
-													
-											</tr>
-													
-											</c:forEach> 
-											<tr>
-												<td colspan="2" align="center">
-													<font color="red">${message}</font>
-												</td>
-											
-											</tr>
-									</table>
-										</div>
-										</td>
-										</tr>
-										</table>
+										<input type="label" id="font1" name="label" value="Add Category" readonly/>
 									</td>
+									<td>&nbsp;</td>
 								</tr>
-								
+							
 								<tr>
-									<td colspan="2" align="right">
-										<input type="button" id="removeBTN" name="button" value="Remove" onfocus="clearContent()" onClick="submitFunction(1)"/>
+									<td colspan="2">
+										<input type="text" name="catname" size="30" placeholder="Name" required="required"/>
 									</td>
+									<td><input type="button" id="button1" name="button" value="Save" onClick="submitFunction(1)"/></td>
 								</tr>
 								<tr>
-								<td  colspan="2" align="center">
-								<br/><input type="label" id="label2" name="message" value="${status}" size="6"/>
+								<td colspan="3">
+									<div style="overflow: scroll; height: 235px; width: 100%; overflow: auto">
+											<table id="tableView1" align="center" cellspacing="2" cellpadding="7" width="350" bgcolor="#abecef">
+													
+														<tr>
+															<th colspan="2"  bgcolor="#099aa2">Category List</th>
+														</tr>
+														<c:forEach items="${ listOfCategory }" var="category">
+														<tr>
+															<td colspan="2"  bgcolor="#abecef">${ category.name }</td>
+																		
+														</tr>
+														</c:forEach>
+											</table>
+									</div>
 								</td>
 								</tr>
 								
 								
-								
-						</table>
+							</table>
 						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-	</form>
+</form>
 </body>
 </html>

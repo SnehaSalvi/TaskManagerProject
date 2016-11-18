@@ -59,6 +59,21 @@
 						</td>
 					</tr>
 					<tr>
+						<td >
+							<table id="setTb">
+								<tr>
+									<td id="setting" >Settings</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+									
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
 						<td rowspan="7" align="center">
 							<img id="img1" src="images/menu.jpg"/>
 						</td>

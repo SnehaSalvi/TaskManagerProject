@@ -116,9 +116,48 @@
 	
 	
 }
+ul
+{
+	list-style: none;
+}
+ul li ul
+{
+ display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+ul li ul 
+{
+	display: none;
+}
+ul li:hover ul {
+  display: block;
+  }
+#setting
+{
+	 font-family: sans-serif;
+    color: #f9d33e;
+    font-size: 15px;
+    position: absolute;
+    
+}
+#menu
+{
+	 font-family: sans-serif;
+    color: white;
+    font-size: 13px;
+    
+    
+}
+#setTb
+{
+	height: 50px;
+	width:100px;
+}
 /* #check:checked + span
 {
   text-decoration:line-through;
 
 } */
-

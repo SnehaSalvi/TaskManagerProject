@@ -36,6 +36,21 @@ function submitFunction(i) {
 		   document.myView.action="http://localhost:8080/TaskManagerChecklist/Task/${taskId}";
 		   document.getElementById('Btn').value = "Complete";
 	   } 
+	   if (i==4)  {
+		    
+		   document.myView.action="../Tasks";
+		   document.getElementById('Btn').value = "Taskview";
+		   }
+	   if (i==5)  {
+		    
+		   document.myView.action="../Item/new";
+		   document.getElementById('Btn').value = "ItemNew";
+		   }
+	   if (i==6)  {
+		    
+		   document.myView.action="../Tasks";
+		   document.getElementById('Btn').value = "TasksList";
+		   }
 	   document.myView.submit()
 	   }
 	   
@@ -118,17 +133,32 @@ function clearContent()
 					<table id="table2" border="1">
 						<tr>
 						<td id="#td5" align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+							<input type="button" name="button" id="button2" value="Task" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
+							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(5)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
+							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(6)"/>
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<table id="setTb">
+								<tr>
+									<td id="setting" >Settings</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+									
+								</tr>
+							</table>
 						</td>
 					</tr>
 					<tr>
@@ -160,7 +190,7 @@ function clearContent()
 															<table id="tableView2" align="center" cellspacing="0"
 																cellpadding="7" width="250" bgcolor="#abecef">
 																<tr>
-																	<th colspan="2">${taskName}</th>
+																	<th colspan="2" bgcolor="#099aa2">${taskName}</th>
 																</tr>
 																<c:forEach items="${ listOfItem }" var="item">
 																	<tr>
@@ -195,7 +225,7 @@ function clearContent()
 																</tr>
 																<c:forEach items="${ listOfItem1 }" var="item1">
 																	<tr>
-																		<td colspan="2"><s>${ item1.name }</s></td>
+																		<td><s>${ item1.name }</s></td>
 																		<td>
 																			<form id="myform" name="myView1" action="../Task/${item1.taskId}" method="POST">
 																				<input type="hidden" name="taskId" value="${item1.taskId}" />
@@ -204,6 +234,7 @@ function clearContent()
 																				<%-- 	<input type="hidden" name="taskId" value="${item1.taskId}"/></td> --%>
 																				<input type="submit" id="addbtn" width="2"
 																					height="2" name="button" value="+" onClick="submitFunction1(1)">
+																					
 																			</form>
 																		</td>
 																	</tr>

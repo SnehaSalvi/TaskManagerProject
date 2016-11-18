@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -23,6 +26,7 @@ import com.task.dao.TaskDao;
 import com.task.dao.Imp.SubtaskDaoImp;
 import com.task.dao.Imp.TaskDaoImp;
 import com.task.dto.Subtask;
+import com.task.dto.Task;
 
 
 @WebServlet("/ViewServlet")
@@ -32,6 +36,7 @@ public class ViewServlet extends HttpServlet
 	private static final String Get_TaskId = "SELECT id FROM mytaskdatabase.task where name=?";
 	private static final String Select_Task_Count = "select count(id) from mytaskdatabase.task";
 	private static final String Delete_Task = "DELETE FROM mytaskdatabase.task where id=?";
+	private static final String Get_CategoryId = "SELECT id FROM mytaskdatabase.category where name=?";
 	private Connection conn;
     public ViewServlet() 
     {
@@ -96,42 +101,16 @@ public class ViewServlet extends HttpServlet
 	{
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		/*String taskName=request.getParameter("taskname");
-		String button=request.getParameter("button");
-		int taskId;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try 
+		String button_action=request.getParameter("button");
+		String status1="Item Scheduled";
+		
+		System.out.println("BUTTON: "+button_action);
+		CategoryDao categoryDao=null;
+		int categoryId;
+		String status="Task Scheduled";
+		String categoryName=request.getParameter("categoryname");
+		if(button_action.equalsIgnoreCase("Remove"))
 		{
-			pstmt = conn.prepareStatement(Get_TaskId);
-			pstmt.setString(1, taskName);
-			rs = pstmt.executeQuery();
-			rs.next();
-			taskId=rs.getInt(1);
-			
-			SubtaskDao subDao=new SubtaskDaoImp();
-			List<Subtask> listOfItem = subDao.findAllItemByID(taskId);
-			request.setAttribute("taskName",taskName);
-			request.setAttribute("listOfItem",listOfItem);
-			RequestDispatcher rd = request.getRequestDispatcher("ViewTask.jsp");
-			rd.forward(request, response);
-			
-		} 
-		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally
-		{
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	*/
 		
 		try
 		{
@@ -149,9 +128,9 @@ public class ViewServlet extends HttpServlet
 				if(count<=0)
 				{
 					String message="No Item in a list";
-					String status="Task Removed Successfully!!!";
+					String status2="Task Removed Successfully!!!";
 					request.setAttribute("message", message);
-					request.setAttribute("status", status);
+					request.setAttribute("status", status2);
 					
 					RequestDispatcher rd = request.getRequestDispatcher("/ViewAllTask.jsp");
 					rd.forward(request, response);
@@ -184,10 +163,195 @@ public class ViewServlet extends HttpServlet
 			e.printStackTrace();
 		}
 	
+		}
+		else if(button_action.equalsIgnoreCase("Done"))
+		{
+			System.out.println("action:"+button_action);
+			try {
+				pstmt = conn.prepareStatement(Get_CategoryId);
+				pstmt.setString(1, categoryName);
 		
+				rs = pstmt.executeQuery();
+				rs.next();
+				categoryId=rs.getInt(1);
+				
+				Task task=new Task();
+				task.setCategoryId(categoryId);
+				task.setName(request.getParameter("taskname"));
+				Date date1;
+				String date3 = null;
+				
+				
+				 try 
+				 {
+					date1 = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("mydate"));
+				
+					task.setDate(date1);
+				 } catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            
+				
+				task.setTime(request.getParameter("time"));
+	            task.setReminder(Integer.parseInt(request.getParameter("reminder")));
+	            task.setStatus(status);
+	            task.setDescription(request.getParameter("description"));
+	            
+	            TaskDao taskDao=new TaskDaoImp();
+	            try
+	            {
+	                boolean result=taskDao.addTask(task);
+	                if(result)
+	                {
+	                	/*String message="Task Created!!!";
+	                
+	                	categoryDao=new CategoryDaoImp();
+	    				List<Category> listOfCategory = categoryDao.findAllCategory();
+	    				System.out.println("size"+listOfCategory.size());
+	    				//String message="Record Inserted Successfully!!!";
+	    				request.setAttribute("listOfCategory",listOfCategory);
+	    				//request.setAttribute("message",message);
+	    				request.setAttribute("message", message);
+	    				RequestDispatcher rd = request.getRequestDispatcher("/AddTask.jsp");
+	    				rd.forward(request, response);*/
+	                	
+	                	
+	            		
+	            		taskDao=new TaskDaoImp();
+	            			
+	            			List listOfTask;
+	            			
+
+	            			try 
+	            			{
+	            					pstmt = conn.prepareStatement(Select_Task_Count);
+	            					rs = pstmt.executeQuery();
+	            					rs.next();
+	            					int count=rs.getInt(1);
+	            					if(count<=0)
+	            					{
+	            						String message="No Task Available";
+	            						request.setAttribute("message", message);
+	            					
+	            						RequestDispatcher rd = request.getRequestDispatcher("/TaskHome.jsp");
+	            						rd.forward(request, response);
+	            							
+	            					}
+	            					else
+	            					{
+	            						listOfTask = taskDao.findAllTask();
+	            						
+	            						request.setAttribute("listOfTask", listOfTask);
+	            					
+	            						RequestDispatcher rd = request.getRequestDispatcher("/TaskHome.jsp");
+	            						rd.forward(request, response);
+	            					}
+	            			} 
+	            			catch (SQLException e) 
+	            			{
+	            				// TODO Auto-generated catch block
+	            				e.printStackTrace();
+	            			}
+	                }
+	                else
+	                {
+	                	String message="Error!!!";
+	                	request.setAttribute("message", message);
+	                      request.getRequestDispatcher("HomeServlet").forward(request, response); 
+	                }
+	                        
+			} 
+			catch (SQLException e1) 
+			{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			}
+	      
+        }
+        catch (SQLException e) 
+		{
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+		}
+	
+		else if(button_action.equalsIgnoreCase("Taskview"))
+		{
+			TaskDao taskDao=null;
+			
+			taskDao=new TaskDaoImp();
+				
+				List listOfTask=null;
+				
+
+				try {
+					pstmt = conn.prepareStatement(Select_Task_Count);
+					rs = pstmt.executeQuery();
+					rs.next();
+					int count=rs.getInt(1);
+					if(count<=0)
+					{
+						String message="No Task Available";
+						request.setAttribute("message", message);
+						
+						RequestDispatcher rd = request.getRequestDispatcher("/TaskHome.jsp");
+						rd.forward(request, response);
+								
+					}
+					else
+					{
+						listOfTask = taskDao.findAllTask();
+						
+						request.setAttribute("listOfTask", listOfTask);
+						
+						RequestDispatcher rd = request.getRequestDispatcher("/TaskHome.jsp");
+						rd.forward(request, response);
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		else if(button_action.equalsIgnoreCase("TasksList"))
+		{
+			TaskDao taskDao=new TaskDaoImp();
+			
+			List listOfTask;
+			try {
+				pstmt = conn.prepareStatement(Select_Task_Count);
+				rs = pstmt.executeQuery();
+				rs.next();
+				int count=rs.getInt(1);
+				if(count<=0)
+				{
+					String message="No Task Available";
+					request.setAttribute("message", message);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/ViewAllTask.jsp");
+					rd.forward(request, response);
+							
+				}
+				else
+				{
+					listOfTask = taskDao.findAllTask();
+					
+					request.setAttribute("listOfTask", listOfTask);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/ViewAllTask.jsp");
+					rd.forward(request, response);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+				
 			
 		
-	
+		}
+		else
+		{
+		}
 	}
-
 }

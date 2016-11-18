@@ -20,7 +20,26 @@ function button1()
     	document.form1.METHOD = "POST"
     form1.submit()
 }
-
+function submitFunction(i) 
+{
+	 
+	   if (i==3)  {
+		    
+		   document.myView.action="Tasks";
+		   document.getElementById('Btn').value = "Taskview";
+		   }
+	   if (i==4)  {
+		    
+		   document.myView.action="Item/new";
+		   document.getElementById('Btn').value = "ItemNew";
+		   }
+	   if (i==5)  {
+		    
+		   document.myView.action="Tasks";
+		   document.getElementById('Btn').value = "TasksList";
+		   }
+	   document.myView.submit()
+	   }
 </script>
 </head>
 <body>
@@ -49,21 +68,37 @@ function button1()
 	<table>
 		<tr>
 			<td>
-			
+			<form name="myView" action="" method="POST">
+				<input type="hidden" id="Btn" name="button" value=""/>
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Task"><input type="button" name="button" id="button2" value="Task"/></a>
+							<input type="button" name="button" id="button2" value="Task" onClick="submitFunction(3)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Item/new"><input type="button" name="button" id="button2" value="Item"/></a>
+							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-						<a href="http://localhost:8080/TaskManagerChecklist/Tasks"><input type="button" name="button" id="button2" value="View"/></a>
+							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(5)"/>
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<table id="setTb">
+								<tr>
+									<td id="setting" >Settings</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+									
+								</tr>
+							</table>
 						</td>
 					</tr>
 					<tr>
@@ -72,6 +107,7 @@ function button1()
 						</td>
 					</tr>
 				</table>
+				</form>
 			</td>
 			<td>
 				<table id="table3">
@@ -92,24 +128,25 @@ function button1()
 										<c:forEach items="${ listOfTask }" var="task">
 										<tr>
 									
-											<td colspan="3" bgcolor="#abecef">
+											<td colspan="3" bgcolor="#abecef" width="300px">
 										
 												
 													
 												${task.name }
 												 </td>
-											<td align="right" bgcolor="#abecef" width="70">
+											<td colspan="2" align="right" bgcolor="#abecef" width="120">
 											<form id="myform" action="Task/${task.taskId}" method="POST">		
 												
 											<input type="hidden" name="taskId" value="${task.taskId}"/>
 											<input type="submit" id="editBTN" width="25" name="button" value="Add Item">
+												<input type="submit" id="editBTN" width="25" name="button" value="Complete">
 											</form>
 											</td>
 											
 										</tr>
 											</c:forEach> 
 											<tr>
-											<td colspan="4" align="center">
+											<td colspan="5" align="center">
 											<font color="red"><h5>${message}</h5></font>
 											</td>
 											</tr>

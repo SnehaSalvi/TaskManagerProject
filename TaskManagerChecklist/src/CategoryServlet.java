@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,6 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import com.sun.swing.internal.plaf.basic.resources.basic;
+import com.task.dao.CategoryDao;
+import com.task.dao.Imp.CategoryDaoImp;
+import com.task.dto.Category;
 
 @WebServlet("/CategoryServlet")
 public class CategoryServlet extends HttpServlet 
@@ -40,27 +45,50 @@ public class CategoryServlet extends HttpServlet
 	}
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+    	List listOfCategory=null;
+		CategoryDao catDao=new CategoryDaoImp();
+    	try 
+    	{
+			listOfCategory=catDao.findAllCategory();
+			request.setAttribute("listOfCategory", listOfCategory);
+			request.getRequestDispatcher("/AddCategory.jsp").forward(request, response); 
+    	} 
+    	catch (SQLException e) 
+    	{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try {
-				pstmt = conn.prepareStatement(Get_Category);
-				rs = pstmt.executeQuery();
-				rs.next();
-				categoryname=rs.getString(2);
-				request.setAttribute("categname", categoryname);
-				request.getRequestDispatcher("AddTask.jsp").forward(request, response); 
-			}
-			catch (SQLException e1) 
-			{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		Category category=new Category();
+		category.setName(request.getParameter("catname"));
+		List listOfCategory=null;
+		CategoryDao catDao=new CategoryDaoImp();
+		try 
+		{
+				boolean result=catDao.addCategory(category);
+				if(result)
+				{
+					listOfCategory=catDao.findAllCategory();
+					request.setAttribute("listOfCategory", listOfCategory);
+					request.getRequestDispatcher("/AddCategory.jsp").forward(request, response); 
+				}
+				else
+				{
+					String message="Error!!!";
+                	request.setAttribute("message", message);
+                      request.getRequestDispatcher("/AddCategory.jsp").forward(request, response); 
+				}
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 			
 	}
 

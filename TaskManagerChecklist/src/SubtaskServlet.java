@@ -164,6 +164,28 @@ public class SubtaskServlet extends HttpServlet
 			RequestDispatcher rd = request.getRequestDispatcher("AddTaskItem.jsp");
 			rd.forward(request, response);
 		}
+		else if(button.equalsIgnoreCase("ItemNew"))
+		{
+			CategoryDao categoryDao=null;
+			TaskDao taskDao=new TaskDaoImp();
+		
+				
+				List<Task> listOfTask=null;
+				try 
+				{
+						listOfTask = taskDao.findAllTask();
+				
+						request.setAttribute("listOfTask", listOfTask);
+						
+						RequestDispatcher rd = request.getRequestDispatcher("/AddItem.jsp");
+						rd.forward(request, response);
+				} 
+				catch (SQLException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 		else if(button.equalsIgnoreCase("Edit"))
 		{
 			
