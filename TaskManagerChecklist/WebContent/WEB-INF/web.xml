@@ -25,30 +25,31 @@
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/HomeServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
+ <!--  <servlet>
     <servlet-name>TaskServlet</servlet-name>
     <servlet-class>TaskServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>TaskServlet</servlet-name>
     <url-pattern>/Task/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
+  </servlet-mapping> -->
+ 
+ <!--  <servlet>
     <servlet-name>SubtaskServlet</servlet-name>
     <servlet-class>SubtaskServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SubtaskServlet</servlet-name>
     <url-pattern>/Item/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
+  </servlet-mapping> -->
+ <!--  <servlet>
     <servlet-name>ViewServlet</servlet-name>
     <servlet-class>ViewServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ViewServlet</servlet-name>
     <url-pattern>/Tasks/*</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
    <servlet>
     <servlet-name>CategoryServlet</servlet-name>
     <servlet-class>CategoryServlet</servlet-class>

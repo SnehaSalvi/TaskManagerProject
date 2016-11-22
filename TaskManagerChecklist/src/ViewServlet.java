@@ -164,7 +164,67 @@ public class ViewServlet extends HttpServlet
 		}
 	
 		}
-		else if(button_action.equalsIgnoreCase("Done"))
+		else if(button_action.equalsIgnoreCase("Complete"))
+		{
+			System.out.println("TASKIDDDD"+Integer.parseInt(request.getParameter("taskId")));
+		try
+		{
+			pstmt = conn.prepareStatement(Delete_Task);
+			pstmt.setInt(1,Integer.parseInt(request.getParameter("taskId")));
+			int result=pstmt.executeUpdate();
+			List listOfTask;
+			TaskDao taskDao=new TaskDaoImp();
+			if(result>=1)
+			{
+				pstmt = conn.prepareStatement(Select_Task_Count);
+				rs = pstmt.executeQuery();
+				rs.next();
+				int count=rs.getInt(1);
+				if(count<=0)
+				{
+										
+					
+					String message="No Item in a list";
+					String status2="Task Removed Successfully!!!";
+					request.setAttribute("message", message);
+					request.setAttribute("status", status2);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/TaskHome.jsp");
+					rd.forward(request, response);
+							
+				}
+				else
+				{
+					
+					listOfTask = taskDao.findAllTask();
+					String status2="Task Removed Successfully!!!";
+					//request.setAttribute("message", message);
+					request.setAttribute("status", status2);
+					request.setAttribute("listOfTask", listOfTask);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("/TaskHome.jsp");
+					rd.forward(request, response);
+				}
+				
+				
+			
+			}
+			else
+			{
+				String message="Error!!!";
+				request.setAttribute("status", message);
+				request.getRequestDispatcher("/ViewAll.jsp").forward(request, response); 
+			}
+			
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		}
+		else if(button_action.equalsIgnoreCase("Save"))
 		{
 			System.out.println("action:"+button_action);
 			try {

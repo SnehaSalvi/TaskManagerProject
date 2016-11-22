@@ -35,7 +35,7 @@
 			   {
 			    
 			   document.myView.action="../Tasks";
-			   document.getElementById('Btn').value = "Done";
+			   document.getElementById('Btn').value = "Save";
 			   }
 		   if (i==3)  {
 			    
@@ -251,7 +251,7 @@ function clearContent()
 										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
 									</td>
 									<td>
-										<input type="button" name="button" id="button1" value="Done" placeholder="Done" onClick="submitFunction(1)"/>
+										<input type="button" name="button" id="button1" value="Save" placeholder="Done" onClick="submitFunction(1)"/>
 									</td>
 								</tr>
 								<tr>

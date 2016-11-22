@@ -20,7 +20,7 @@ function button1()
     	document.form1.METHOD = "POST"
     form1.submit()
 }
-function submitFunction(i) 
+ function submitFunction(i) 
 {
 	 
 	   if (i==3)  {
@@ -40,6 +40,7 @@ function submitFunction(i)
 		   }
 	   document.myView.submit()
 	   }
+
 </script>
 </head>
 <body>
@@ -134,13 +135,18 @@ function submitFunction(i)
 													
 												${task.name }
 												 </td>
-											<td colspan="2" align="right" bgcolor="#abecef" width="120">
+											<td  align="right" bgcolor="#abecef" width="60">
 											<form id="myform" action="Task/${task.taskId}" method="POST">		
 												
 											<input type="hidden" name="taskId" value="${task.taskId}"/>
 											<input type="submit" id="editBTN" width="25" name="button" value="Add Item">
-												<input type="submit" id="editBTN" width="25" name="button" value="Complete">
 											</form>
+											</td>
+											<td  align="right" bgcolor="#abecef" width="60">
+												<form id="myform1" action="Tasks" method="POST">
+												<input type="hidden" name="taskId" value="${task.taskId}"/>
+													<input type="submit" id="editBTN" width="25" name="button" value="Complete">
+												</form>
 											</td>
 											
 										</tr>

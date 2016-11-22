@@ -28,7 +28,7 @@ import com.task.dao.Imp.TaskDaoImp;
 import com.task.dto.Subtask;
 import com.task.dto.Task;
 
-@WebServlet("/SubtaskServlet")
+
 public class SubtaskServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;

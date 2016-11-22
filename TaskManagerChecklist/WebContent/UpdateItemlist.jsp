@@ -57,7 +57,7 @@ function submitFunction(i)
 				Task Manager
 			</td>
 			<td id="td4" align="center">
-				<a href="Home.jsp"><img id="list1" src="../../../images/HomePic.png"/></a>
+				<a href="../../../Home.jsp"><img id="list1" src="../../../images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
