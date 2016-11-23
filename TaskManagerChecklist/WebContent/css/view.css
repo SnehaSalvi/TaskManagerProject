@@ -37,7 +37,7 @@
 #editBTN
 {
 	height: 25px;
-    width: 35px;
+    width: 65px;
     border-radius: 7px;
     border: 1px solid #000;
     font-family: sans-serif;
@@ -70,7 +70,11 @@
     font-size: 11px;
     border: 0;
 }
-
+#addbtn1
+{
+	 width: 65px;
+	  border-radius: 7px;
+}
 #createBTN
 {
 	height: 25px;

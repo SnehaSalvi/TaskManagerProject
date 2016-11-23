@@ -99,9 +99,7 @@ function clearContent()
 </head>
 <body>
 <input type="hidden" >
-<form name="myView" action="" method="POST">
-<input type="hidden" id="Btn" name="button" value=""/>
-<input type="hidden" name="someField" id="someFieldId" />
+
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -128,7 +126,9 @@ function clearContent()
 	<table>
 		<tr>
 			<td>
-			
+			<form name="myView" action="" method="POST">
+			<input type="hidden" id="Btn" name="button" value=""/>
+			<input type="hidden" name="someField" id="someFieldId" />
 				<table id="table2" border="1">
 				<tr>
 						<td id="#td5" align="center">
@@ -140,11 +140,11 @@ function clearContent()
 							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td align="center">
 							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(5)"/>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td >
 							<table id="setTb">
@@ -166,9 +166,10 @@ function clearContent()
 						</td>
 					</tr>
 				</table>
-				
+				</form>
 			</td>
 			<td>
+			<form action="../Tasks" method="POST">
 				<table id="table3">
 				
 					<tr>
@@ -251,7 +252,7 @@ function clearContent()
 										<input type="text" name="description" placeholder="Description" size="50" required="required"/>
 									</td>
 									<td>
-										<input type="button" name="button" id="button1" value="Save" placeholder="Done" onClick="submitFunction(1)"/>
+										<input type="submit" name="button" id="button1" value="Save" placeholder="Done"/>
 									</td>
 								</tr>
 								<tr>
@@ -261,10 +262,11 @@ function clearContent()
 						</td>
 					</tr>
 				</table>
+				</form>
 			</td>
 		</tr>
 	</table>
-</form>
+
 <!--<form action="Hello">
 Name:<input type="text" name="user"/>
 <input type="submit" value="go"/>

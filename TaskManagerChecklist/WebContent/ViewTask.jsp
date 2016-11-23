@@ -89,7 +89,10 @@ document.getElementById('removeBTN').submit;
 }
 function clearContent()
 {
+	
+
 	document.getElementById("label2").value="";   
+	document.getElementById("label3").value="";   
 }
 </script>
 </head>
@@ -128,11 +131,11 @@ function clearContent()
 							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(5)"/>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td align="center">
 							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(6)"/>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td >
 							<table id="setTb">
@@ -275,11 +278,12 @@ function clearContent()
 											</form>
 									</tr>
 									<tr>
-										<td colspan="2" align="center"><br /> <input
-											type="label" id="label2" name="message1" value="${show}"
-											size="6" /><br/><input
-											type="label" id="label2" name="message" value="${status}"
-											size="6" /></td>
+										<td colspan="2" align="center"><br /> 
+									<%-- 	<input type="label" id="label2" name="message1" value="${show}" size="6" /> --%>
+										<font color="red">
+										<input type="label" id="label2" name="message" value="${status}" size="6" border="none" />
+										</font>
+										</td>
 									</tr>
 
 

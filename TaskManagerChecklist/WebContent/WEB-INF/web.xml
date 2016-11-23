@@ -2,12 +2,9 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>TaskManagerChecklist</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>HomeServlet</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+  
+    <welcome-file>Home.jsp</welcome-file>
+   
   </welcome-file-list>
   <servlet>
     <servlet-name>Hello</servlet-name>
@@ -50,12 +47,12 @@
     <servlet-name>ViewServlet</servlet-name>
     <url-pattern>/Tasks/*</url-pattern>
   </servlet-mapping> -->
-   <servlet>
+ <!--   <servlet>
     <servlet-name>CategoryServlet</servlet-name>
     <servlet-class>CategoryServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CategoryServlet</servlet-name>
     <url-pattern>/Category/*</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
 </web-app>

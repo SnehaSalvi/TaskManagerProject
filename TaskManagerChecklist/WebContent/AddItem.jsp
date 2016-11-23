@@ -56,9 +56,7 @@ function submitFunction(i)
 
 </head>
 <body>
-<form name="myView" action="" method="POST">
-<input type="hidden" id="Btn" name="button" value=""/>
-<input type="hidden" name="taskId" value="${taskId}" />
+
 	<table id="table1">
 		<tr>
 			<td id="td1">
@@ -84,6 +82,9 @@ function submitFunction(i)
 	<table>
 		<tr>
 			<td>
+			<form name="myView" action="" method="POST">
+			<input type="hidden" id="Btn" name="button" value=""/>
+			<input type="hidden" name="taskId" value="${taskId}" />
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
@@ -95,11 +96,11 @@ function submitFunction(i)
 							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td align="center">
 							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(5)"/>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td >
 							<table id="setTb">
@@ -121,11 +122,15 @@ function submitFunction(i)
 						</td>
 					</tr>
 				</table>
+				</form>
 			</td>
 			<td>
 				<table id="table3">
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
+						<form action="../Item/list" method="POST">
+						<!-- 	<input type="hidden" id="Btn" name="button" value="Done."/> -->
+							<input type="hidden" name="taskId" value="${taskId}" />
 							<table align="center" cellspacing="6" cellpadding="4">
 							<tr>
 								<td  colspan="3" align="center"><input type="label" id="label2" name="message" value="${message}" size="6"/></td>
@@ -167,17 +172,18 @@ function submitFunction(i)
 										
 									</td>
 									<td>
-										<input type="button" id="button1" name="button" value="Save" onClick="submitFunction(2)"/>
+										<input type="submit" id="button1" name="button" value="Save."/>
 									</td>
 								</tr>
 								
 							</table>
+							</form>
 						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-</form>
+
 </body>
 </html>

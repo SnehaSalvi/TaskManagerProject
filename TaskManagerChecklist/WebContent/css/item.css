@@ -28,6 +28,16 @@
 	width:250px;
 	
 }
+#label3
+{
+	border: none;
+	size: 8px;
+	color:red;
+	font-family:Times New Roman;
+	font-size:14px;
+	width:250px;
+	
+}
 #select1
 {
 	width:220px;

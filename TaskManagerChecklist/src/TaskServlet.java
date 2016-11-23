@@ -32,7 +32,7 @@ import com.task.dto.Category;
 import com.task.dto.Subtask;
 import com.task.dto.Task;
 
-@WebServlet(urlPatterns = {"/Task/*","/Tasks/*","/Item/*"})
+@WebServlet(urlPatterns = {"/Task/*","/Tasks/*","/Item/*","/Category/*"})
 public class TaskServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -62,7 +62,7 @@ public class TaskServlet extends HttpServlet
 	{
 		//String button_action=request.getParameter("button");
 		// TODO Auto-generated method stub
-		CategoryDao categoryDao=null;
+		/*CategoryDao categoryDao=null;
 		TaskDao taskDao=null;
 		
 		taskDao=new TaskDaoImp();
@@ -97,7 +97,21 @@ public class TaskServlet extends HttpServlet
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		*/
 		
+		List listOfCategory=null;
+		CategoryDao catDao=new CategoryDaoImp();
+    	try 
+    	{
+			listOfCategory=catDao.findAllCategory();
+			request.setAttribute("listOfCategory", listOfCategory);
+			request.getRequestDispatcher("/AddCategory.jsp").forward(request, response); 
+    	} 
+    	catch (SQLException e) 
+    	{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//doPost(req, resp);
 	}
 
@@ -121,6 +135,7 @@ public class TaskServlet extends HttpServlet
 			response.setContentType("text/html");
 			String status1="Item Scheduled";
 			String button_action=request.getParameter("button");
+			System.out.println("Hello"+request.getParameter("name"));
 			System.out.println("BUTTON: "+button_action);
 			CategoryDao categoryDao=null;
 			int categoryId;
@@ -313,7 +328,7 @@ public class TaskServlet extends HttpServlet
 					e.printStackTrace();
 				}
 			}
-			else if(button_action.equalsIgnoreCase("Done.") || button_action.equalsIgnoreCase("Done"))
+			else if(button_action.equalsIgnoreCase("Save.") || button_action.equalsIgnoreCase("Done"))
 			{
 				try {
 					pstmt = conn.prepareStatement(Get_TaskId);
@@ -345,7 +360,7 @@ public class TaskServlet extends HttpServlet
 		    				rs.next();
 		    				Date date1=rs.getDate(1);
 		    				String time=rs.getString(2);
-		    				
+		    				status="Item Added Successfully!!!";
 		    				String date;
 							
 								DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -361,6 +376,7 @@ public class TaskServlet extends HttpServlet
 							request.setAttribute("taskId",taskId);
 							request.setAttribute("date",date);
 							request.setAttribute("time",time);
+							request.setAttribute("status",status);
 							RequestDispatcher rd = request.getRequestDispatcher("/ViewTask.jsp");
 							rd.forward(request, response);
 						}
@@ -912,7 +928,7 @@ public class TaskServlet extends HttpServlet
 				e.printStackTrace();
 			}
 	}
-	else if(button_action.equalsIgnoreCase("Complete"))
+	else if(button_action.equalsIgnoreCase("CompleteTask"))
 	{
 		System.out.println("TASKIDDDD"+Integer.parseInt(request.getParameter("taskId")));
 	try
@@ -1157,6 +1173,42 @@ public class TaskServlet extends HttpServlet
 			
 		
 	
+	}
+	else if(button_action.equalsIgnoreCase("Add Cat"))
+	{
+		Category category=new Category();
+		category.setName(request.getParameter("catname"));
+		List listOfCategory=null;
+		CategoryDao catDao=new CategoryDaoImp();
+		try 
+		{
+				boolean result=catDao.addCategory(category);
+				if(result)
+				{
+					listOfCategory=catDao.findAllCategory();
+					request.setAttribute("listOfCategory", listOfCategory);
+					request.getRequestDispatcher("/AddCategory.jsp").forward(request, response); 
+				}
+				else
+				{
+					String message="Error!!!";
+                	request.setAttribute("message", message);
+                      request.getRequestDispatcher("/AddCategory.jsp").forward(request, response); 
+				}
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}		
+	else if(button_action.equalsIgnoreCase("submit"))
+	{
+		String name=request.getParameter("name");
+		String name2="Hello"+" "+name;
+		request.setAttribute("name2", name2);
+		request.getRequestDispatcher("/Test.jsp").forward(request, response); 
 	}
 	else
 	{

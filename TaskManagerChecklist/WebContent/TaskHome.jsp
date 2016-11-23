@@ -82,11 +82,11 @@ function button1()
 							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td align="center">
 							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(5)"/>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td >
 							<table id="setTb">
@@ -135,17 +135,18 @@ function button1()
 													
 												${task.name }
 												 </td>
-											<td  align="right" bgcolor="#abecef" width="60">
+											<td  align="center" bgcolor="#abecef" >
 											<form id="myform" action="Task/${task.taskId}" method="POST">		
 												
 											<input type="hidden" name="taskId" value="${task.taskId}"/>
-											<input type="submit" id="editBTN" width="25" name="button" value="Add Item">
+											<input type="submit" id="editBTN" name="button" value="Add Item">
 											</form>
 											</td>
-											<td  align="right" bgcolor="#abecef" width="60">
+											<td  align="center" bgcolor="#abecef">
 												<form id="myform1" action="Tasks" method="POST">
 												<input type="hidden" name="taskId" value="${task.taskId}"/>
-													<input type="submit" id="editBTN" width="25" name="button" value="Complete">
+													<input type="hidden" name="button" value="CompleteTask"/>
+													<input type="submit" id="editBTN" name="button1" value="Complete">
 												</form>
 											</td>
 											
@@ -168,7 +169,7 @@ function button1()
 							<table align="right">
 							<tr><td>&nbsp;</td>
 											<td align="left">
-												<!-- <a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=6"> --><input type="submit" name="button" id="createBTN1" value="Create New Task" /><!-- </a> -->
+												<!-- <a href="http://localhost:8080/TaskManagerChecklist/HomeServlet?button=6"> --><input type="submit" name="button1" id="createBTN1" value="Create New Task" /><!-- </a> -->
 											</td>
 											</tr>
 								

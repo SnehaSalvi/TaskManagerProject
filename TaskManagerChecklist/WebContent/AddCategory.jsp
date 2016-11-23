@@ -20,7 +20,7 @@ function submitFunction(i)
 		   {
 		    
 		   document.myView.action="../Category/new";
-		   document.getElementById('Btn').value = "Add More";
+		   document.getElementById('Btn').value = "Add Cat";
 		   }
 	   if (i==3)  {
 		    
@@ -81,11 +81,11 @@ function submitFunction(i)
 							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
-					<tr>
+				<!-- 	<tr>
 						<td align="center">
 							<input type="button" name="button" id="button2" value="View" onClick="submitFunction(5)"/>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td >
 							<table id="setTb">
