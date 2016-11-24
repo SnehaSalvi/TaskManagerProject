@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,8 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +34,8 @@ import com.task.dao.Imp.TaskDaoImp;
 import com.task.dto.Category;
 import com.task.dto.Subtask;
 import com.task.dto.Task;
-
+import com.google.gson.Gson;
+  
 @WebServlet(urlPatterns = {"/Task/*","/Tasks/*","/Item/*","/Category/*"})
 public class TaskServlet extends HttpServlet
 {
@@ -50,6 +54,7 @@ public class TaskServlet extends HttpServlet
 	
 	private static final String Select_Task_Date_Time = "SELECT date,time FROM mytaskdatabase.task where id=?";
 	
+	private static final String Select_Category ="SELECT name FROM mytaskdatabase.category";
 	private Connection conn;
     public TaskServlet() 
     {
@@ -135,12 +140,17 @@ public class TaskServlet extends HttpServlet
 			response.setContentType("text/html");
 			String status1="Item Scheduled";
 			String button_action=request.getParameter("button");
-			System.out.println("Hello"+request.getParameter("name"));
+			System.out.println("Hello");
 			System.out.println("BUTTON: "+button_action);
 			CategoryDao categoryDao=null;
 			int categoryId;
 			String status="Task Scheduled";
 			String categoryName=request.getParameter("categoryname");
+			String catName=request.getParameter("catname");
+			System.out.println("CATEGORY NAME: "+catName);
+			   Calendar cal = Calendar.getInstance();
+		        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		        System.out.println( sdf.format(cal.getTime()) );
 		//	String categoryName1=request.getParameter("categoryname1");
 			
 			//Boolean active = Boolean.valueOf(request.getParameter("someField"));
@@ -328,7 +338,7 @@ public class TaskServlet extends HttpServlet
 					e.printStackTrace();
 				}
 			}
-			else if(button_action.equalsIgnoreCase("Save.") || button_action.equalsIgnoreCase("Done"))
+			else if(button_action.equalsIgnoreCase("Done.") || button_action.equalsIgnoreCase("Done"))
 			{
 				try {
 					pstmt = conn.prepareStatement(Get_TaskId);
@@ -1179,15 +1189,23 @@ public class TaskServlet extends HttpServlet
 		Category category=new Category();
 		category.setName(request.getParameter("catname"));
 		List listOfCategory=null;
+	
 		CategoryDao catDao=new CategoryDaoImp();
 		try 
 		{
 				boolean result=catDao.addCategory(category);
 				if(result)
 				{
-					listOfCategory=catDao.findAllCategory();
-					request.setAttribute("listOfCategory", listOfCategory);
-					request.getRequestDispatcher("/AddCategory.jsp").forward(request, response); 
+					
+    					//listOfCategory=catDao.findCategory();
+    					response.getWriter().print(new Gson().toJson(request.getParameter("catname")));
+    					//String taskList=new Gson().toJson(listOfCategory);
+    					//	String listCat= taskList;
+					
+//						request.setAttribute("listOfCategory", listOfCategory);
+//						request.getRequestDispatcher("/AddCategory.jsp").forward(request, response); 
+    				
+    			
 				}
 				else
 				{

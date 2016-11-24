@@ -227,7 +227,7 @@ function clearContent()
 								<tr>
 									<td colspan="2">
 										<input type="label" id="label2" name="newtime" value="Time" size="6" readonly/>
-										<input type="time" name="time" placeholder="Time" size="30" required="required"/>
+										<input type="time" name="time" placeholder="Time" size="30" required="required" step="1"/>
 								<!-- 	  <input id="timepicker1" type="text"  name="time" class="input-small"> -->
 									</td>
 								</tr>

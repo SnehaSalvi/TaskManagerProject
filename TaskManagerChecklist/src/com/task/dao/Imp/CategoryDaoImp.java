@@ -20,6 +20,7 @@ public class CategoryDaoImp implements CategoryDao
 		private static final String Get_Category_By_Name = "SELECT id FROM mytaskdatabase.category where name=?";
 		private static final String Select_All_Category = "SELECT * FROM mytaskdatabase.category";
 		private static final String INSERT_Cat = "INSERT INTO mytaskdatabase.category(id,name) VALUES(?,?)";
+		private static final String Select_Category = "SELECT name FROM mytaskdatabase.category";
 		private Connection conn;
 	
 		public CategoryDaoImp() 
@@ -92,6 +93,20 @@ public class CategoryDaoImp implements CategoryDao
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public List findCategory() throws SQLException 
+	{
+		List listOfCategory = new ArrayList();
+		PreparedStatement pstmt=conn.prepareStatement(Select_Category);
+		ResultSet rs = pstmt.executeQuery();
+		//System.out.println(rs.);
+		while (rs.next()) {
+		
+			listOfCategory.add(rs.getString(1));
+		}
+		return listOfCategory;
 	}
 	
 

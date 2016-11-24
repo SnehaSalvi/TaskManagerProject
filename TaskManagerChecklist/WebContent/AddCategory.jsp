@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="java.sql.*"%>
-
+ <%@page import="com.task.dto.Category"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,7 +13,43 @@
 <link href="../css/item.css" type="text/css" rel="stylesheet"/>
 <link href="../css/view.css" type="text/css" rel="stylesheet"/>
 <link href="../css/viewItem.css" type="text/css" rel="stylesheet"/>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script type="text/javascript">
+$(document).ready(function(){
+	
+	
+
+    $('#mode').click(function(){  
+    	console.log("Category Name",$('#catName').val());
+         $.ajax({  
+            url:'http://localhost:8080/TaskManagerChecklist/Category/new',  
+            type:'post',  
+            dataType: 'json',  
+            data: {
+                catname:$('#catName').val(),
+                button:'Add Cat',
+               },
+               success:function(result){
+            	   document.getElementById("catName").value="";
+             		var tableId=document.getElementById("tableView1");
+             		var rowCount = $('#tableView1 tr').length;
+            	    console.log("Result",result.toString());
+            	   var row = tableId.insertRow(rowCount);
+            	   var cell1 = row.insertCell(0);
+            	   cell1.innerHTML =result.toString();
+            	    var t=1;
+            	   /// for(var i=0;i<result.length;i++){
+            			// console.log("Result Name",result[i]);
+            	    	//var row = tableId.insertRow(i);
+            	    	//var cell1 = row.insertCell(0);
+            	    	//cell1.innerHTML = result[i].toString();
+            	    	
+            	  //  }
+            }  
+        });   
+    });  
+});  
 function submitFunction(i) 
 {
 	   if (i==1) 
@@ -125,23 +161,24 @@ function submitFunction(i)
 							
 								<tr>
 									<td colspan="2">
-										<input type="text" name="catname" size="30" placeholder="Name" required="required"/>
+										<input type="text" name="catname" id="catName" size="30" placeholder="Name" required="required"/>
 									</td>
-									<td><input type="button" id="button1" name="button" value="Save" onClick="submitFunction(1)"/></td>
+									<td><input type="button" id="mode" name="button" value="Save"/></td>
 								</tr>
 								<tr>
 								<td colspan="3">
 									<div style="overflow: scroll; height: 235px; width: 100%; overflow: auto">
-											<table id="tableView1" align="center" cellspacing="2" cellpadding="7" width="350" bgcolor="#abecef">
+											<table id="tableView1" align="center" cellpadding="7" width="350">
 													
 														<tr>
-															<th colspan="2"  bgcolor="#099aa2">Category List</th>
+															<th colspan="2">Category List</th>
 														</tr>
 														<c:forEach items="${ listOfCategory }" var="category">
 														<tr>
-															<td colspan="2"  bgcolor="#abecef">${ category.name }</td>
+															<td colspan="2">${ category.name }</td>
 																		
 														</tr>
+														
 														</c:forEach>
 											</table>
 									</div>

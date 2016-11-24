@@ -12,5 +12,6 @@ public interface CategoryDao
 	Category getCategoryName(String categoryName) throws SQLException;
 	boolean addCategory(Category  category)throws SQLException,IOException;
 	List<Category> findAllCategory() throws SQLException;
+	List findCategory() throws SQLException;
 	public void close();
 }

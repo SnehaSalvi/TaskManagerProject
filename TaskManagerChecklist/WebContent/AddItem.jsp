@@ -129,7 +129,7 @@ function submitFunction(i)
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
 						<form action="../Item/list" method="POST">
-						<!-- 	<input type="hidden" id="Btn" name="button" value="Done."/> -->
+							<input type="hidden" id="Btn" name="button" value="Done."/>
 							<input type="hidden" name="taskId" value="${taskId}" />
 							<table align="center" cellspacing="6" cellpadding="4">
 							<tr>
@@ -172,7 +172,7 @@ function submitFunction(i)
 										
 									</td>
 									<td>
-										<input type="submit" id="button1" name="button" value="Save."/>
+										<input type="submit" id="button1" name="button" value="Save"/>
 									</td>
 								</tr>
 								

@@ -94,11 +94,27 @@
 	border-color: black;
 	width: 350px;
 }
+#tableView111
+{
+	background-color:white;
+}
 #tableView1
 {
 	border: thick;
-	background-color: white;
-	border-color: black;
+	background-color:white;
+	
+	
+}
+#tableView1 td
+{
+	background-color:#abecef;
+}
+#tableView1 th
+{
+	background-color: #477d9a;
+	 
+	  
+	  color:white;
 }
 #tableView2
 {
@@ -164,6 +180,12 @@ ul li:hover ul {
 	 font-family: sans-serif;
     color: white;
     font-size: 13px;
+    
+    
+}
+#tr_color
+{
+	background-color: #099aa2;
     
     
 }
