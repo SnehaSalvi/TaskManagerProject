@@ -25,32 +25,43 @@
 
 	$(function() 
 	{
-	    $( "#datepicker1" ).datepicker();
+	    $( "#datepicker1" ).datepicker({ dateFormat: 'mm/dd/yy',  beforeShowDay: NotBeforeToday});
 	    $('#timepicker1').timepicker();
 
 	});
+	function NotBeforeToday(date)
+	{
+	    var now = new Date();//this gets the current date and time
+	    if (date.getFullYear() == now.getFullYear() && date.getMonth() == now.getMonth() && date.getDate() >= now.getDate())
+	        return [true];
+	    if (date.getFullYear() >= now.getFullYear() && date.getMonth() > now.getMonth())
+	       return [true];
+	     if (date.getFullYear() > now.getFullYear())
+	       return [true];
+	    return [false];
+	}
 	function submitFunction(i) 
 	{
-		   if (i==1) 
-			   {
-			    
-			   document.myView.action="../Tasks";
-			   document.getElementById('Btn').value = "Save";
-			   }
+		 
 		   if (i==3)  {
 			    
 			   document.myView.action="../Tasks";
-			   document.getElementById('Btn').value = "Taskview";
+			   document.getElementById('mode').value = "Taskview";
 			   }
 		   if (i==4)  {
 			    
-			   document.myView.action="../Item/new";
-			   document.getElementById('Btn').value = "ItemNew";
+			   document.myView.action="../Items/new";
+			   document.getElementById('mode').value = "ItemNew";
 			   }
 		   if (i==5)  {
 			    
-			   document.myView.action="../Tasks";
-			   document.getElementById('Btn').value = "TasksList";
+			   document.myView.action="Tasks";
+			   document.getElementById('mode').value = "TasksList";
+			   }
+		   if (i==6)  {
+			    
+			   document.myView.action="../Category/new";
+			   document.getElementById('mode').value = "CategoryNew";
 			   }
 		   document.myView.submit()
 		   }
@@ -111,7 +122,7 @@ function clearContent()
 				Task Manager
 			</td>
 			<td id="td4" align="center">
-				<a href="../Home.jsp"><img id="list1" src="../images/HomePic.png"/></a>
+				<a href="../Home"><img id="list1" src="../images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
@@ -127,9 +138,8 @@ function clearContent()
 		<tr>
 			<td>
 			<form name="myView" action="" method="POST">
-			<input type="hidden" id="Btn" name="button" value=""/>
-			<input type="hidden" name="someField" id="someFieldId" />
-				<table id="table2" border="1">
+			<input type="hidden" id="mode" name="mode" value=""/>
+					<table id="table2" border="1">
 				<tr>
 						<td id="#td5" align="center">
 							<input type="button" name="button" id="button2" value="Task" onClick="submitFunction(3)"/>
@@ -153,8 +163,8 @@ function clearContent()
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td align="center"><input type="button" name="button" id="button3" value="Category" onClick="submitFunction(6)" /></td>
 									
 								</tr>
 							</table>
@@ -170,6 +180,7 @@ function clearContent()
 			</td>
 			<td>
 			<form action="../Tasks" method="POST">
+				<input type="hidden" id="mode" name="mode" value="Save"/>
 				<table id="table3">
 				
 					<tr>

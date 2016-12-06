@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="java.sql.*"%>
+    <%@page import="java.sql.*"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -9,10 +9,38 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link href="../css/home.css" type="text/css" rel="stylesheet"/>
-<link href="../css/item.css" type="text/css" rel="stylesheet"/>
-<link href="../css/view.css" type="text/css" rel="stylesheet"/>
+
+<link href="../../css/home.css" type="text/css" rel="stylesheet"/>
+<link href="../../css/task.css" type="text/css" rel="stylesheet"/>
+
+<link href="../../css/view.css" type="text/css" rel="stylesheet"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+	  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath}/scripts/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script type="text/javascript">
+
+$(function() 
+		{
+			 $( "#datepicker1" ).datepicker({ dateFormat: 'mm/dd/yy',  beforeShowDay: NotBeforeToday});
+		    $('#timepicker1').timepicker();
+
+		});
+function NotBeforeToday(date)
+{
+    var now = new Date();//this gets the current date and time
+    if (date.getFullYear() == now.getFullYear() && date.getMonth() == now.getMonth() && date.getDate() >= now.getDate())
+        return [true];
+    if (date.getFullYear() >= now.getFullYear() && date.getMonth() > now.getMonth())
+       return [true];
+     if (date.getFullYear() > now.getFullYear())
+       return [true];
+    return [false];
+}
 function clearContent()
 {
 	document.getElementById("label2").value="";   
@@ -26,35 +54,43 @@ function submitFunction(i)
 {
 	 if (i==3)  {
 		    
-		   document.myView.action="../Tasks";
+		   document.myView.action="../../Tasks";
 		   document.getElementById('mode').value = "Taskview";
 		   }
 	   if (i==4)  {
 		    
-		   document.myView.action="../Items/new";
+		   document.myView.action="../../Items/new";
 		   document.getElementById('mode').value = "ItemNew";
 		   }
 	   if (i==5)  {
 		    
-		   document.myView.action="../Tasks";
+		   document.myView.action="../../Tasks";
 		   document.getElementById('mode').value = "TasksList";
 		   }
 	   if (i==6)  {
 		    
-		   document.myView.action="../Category/new";
+		   document.myView.action="../../Category/new";
 		   document.getElementById('mode').value = "CategoryNew";
 		   }
 	   document.myView.submit()
 	   }
 </script>
+<style type="text/css">
+.ui-datepicker {
+   background: #333;
+   border: 1px solid #555;
+   color: #EEE;
+	font-size: 2;
+
+ }
+</style>
 
 </head>
 <body>
-
-	<table id="table1">
+<table id="table1">
 		<tr>
 			<td id="td1">
-				<img id="banner" src="../images/banner.jpg"/>
+				<img id="banner" src="../../images/banner.jpg"/>
 			</td>
 			<td id="td_blank">
 			</td>
@@ -62,13 +98,13 @@ function submitFunction(i)
 				Task Manager
 			</td>
 			<td id="td4" align="center">
-				<a href="../Home"><img id="list1" src="../images/HomePic.png"/></a>
+				<a href="../../Home"><img id="list1" src="../../images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
 			</td>
 			<td id="td4" align="center">
-				<img id="list" src="../images/list.png"/>
+				<img id="list" src="../../images/list.png"/>
 			</td>
 		</tr>
 	</table>
@@ -112,7 +148,7 @@ function submitFunction(i)
 					</tr>
 					<tr>
 						<td rowspan="7" align="center">
-							<img id="img1" src="../images/menu.jpg"/>
+							<img id="img1" src="../../images/menu.jpg"/>
 						</td>
 					</tr>
 				</table>
@@ -122,8 +158,8 @@ function submitFunction(i)
 				<table id="table3">
 					<tr>
 						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
-						<form action="../Items/list" method="POST">
-							<input type="hidden" id="mode" name="mode" value="AddNewItem"/>
+						<form action="../../Tasks/${taskId}" method="POST">
+							<input type="hidden" id="mode" name="mode" value="RemindMe"/>
 					
 							<table align="center" cellspacing="6" cellpadding="4">
 							<tr>
@@ -131,30 +167,31 @@ function submitFunction(i)
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="label" id="font1" name="label" value="Add Item" readonly/>
+										<input type="label" id="font1" name="label" value="Pick Date & Time" readonly/>
 									</td>
 									<td>&nbsp;</td>
+								</tr>
+							<tr>
+									<td colspan="2">
+										<input type="label" id="label2" name="newdate" value="Date" size="6" readonly/>
+										<input type="text" name="mydate" class="tid" id="datepicker1"/>
+									<!-- 	<input type="date" name="mydate" class="tid" required="required"/> -->
+									</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<select id="select1" name="taskname" placeholder="Task" onfocus="clearContent()" required="required">
-										 <option value="">Please Select Task</option>
-											<c:forEach items="${ listOfTask }" var="task">
-										
-												<option value="${ task.name }">${ task.name }</option> 
-												
-											</c:forEach>
-										</select>
+										<input type="label" id="label2" name="newtime" value="Time" size="6" readonly/>
+										<input type="time" name="time" placeholder="Time" size="30" required="required" step="1"/>
+								<!-- 	  <input id="timepicker1" type="text"  name="time" class="input-small"> -->
 									</td>
-									<td>&nbsp;</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="text" name="itemname" size="30" placeholder="Name" required="required"/>
+										<input id="label2" type="label" value="Reminder" size="7" readonly/>
+										Off<input type="radio" id="radio1" name="reminder" value="0" checked required="required"/>
+										On<input type="radio" id="radio1" name="reminder" value="1" required="required"/>
 									</td>
-									<td>&nbsp;</td>
 								</tr>
-								
 								<!-- <tr>
 									<td colspan="2">
 										<input type="text" name="description" placeholder="Description" size="50" required="required"/>

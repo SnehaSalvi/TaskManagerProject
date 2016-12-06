@@ -21,30 +21,25 @@ function submitForm()
 }
 function submitFunction(i) {
 	  
-	    if (i==2)  {
-		    
-		   document.myView.action="http://localhost:8080/TaskManagerChecklist/Task/${taskId}/Item/edit";
-		   document.getElementById('Btn').value = "Edit";
-		   }
-	/*   if (i==3)  {
-		    
-		   document.myView.action="http://localhost:8080/TaskManagerChecklist/Task/${taskId}";
-		   document.getElementById('Btn').value = "Complete";
-	   }  */
-	   if (i==4)  {
+	 if (i==3)  {
 		    
 		   document.myView.action="../Tasks";
-		   document.getElementById('Btn').value = "Taskview";
+		   document.getElementById('mode').value = "Taskview";
+		   }
+	   if (i==4)  {
+		    
+		   document.myView.action="../Items/new";
+		   document.getElementById('mode').value = "ItemNew";
 		   }
 	   if (i==5)  {
 		    
-		   document.myView.action="../Item/new";
-		   document.getElementById('Btn').value = "ItemNew";
+		   document.myView.action="../Tasks";
+		   document.getElementById('mode').value = "TasksList";
 		   }
 	   if (i==6)  {
 		    
-		   document.myView.action="../Tasks";
-		   document.getElementById('Btn').value = "TasksList";
+		   document.myView.action="../Category/new";
+		   document.getElementById('mode').value = "CategoryNew";
 		   }
 	   document.myView.submit()
 	   }
@@ -104,7 +99,7 @@ function clearContent()
 				<td id="td1"><img id="banner" src="../images/banner.jpg" /></td>
 				<td id="td_blank"></td>
 				<td id="td2">Task Manager</td>
-				<td id="td4" align="center"><a href="../Home.jsp"><img
+				<td id="td4" align="center"><a href="../Home"><img
 						id="list1" src="../images/HomePic.png" /></a></td>
 				<td id="td3" align="center"><input type="button" name="remind"
 					id="button1" value="Remind Me" /></td>
@@ -119,16 +114,16 @@ function clearContent()
 		<form name="myView" action="" method="POST">
 		<input type="hidden" name="taskname" value="${taskName}" />
 		<input type="hidden" name="taskId" value="${taskId}" />
-			<input type="hidden" id="Btn" name="button" value=""/>
+			<input type="hidden" id="mode" name="mode" value=""/>
 					<table id="table2" border="1">
 						<tr>
 						<td id="#td5" align="center">
-							<input type="button" name="button" id="button2" value="Task" onClick="submitFunction(4)"/>
+							<input type="button" name="button" id="button2" value="Task" onClick="submitFunction(3)"/>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">
-							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(5)"/>
+							<input type="button" name="button" id="button2" value="Item" onClick="submitFunction(4)"/>
 						</td>
 					</tr>
 					<!-- <tr>
@@ -143,9 +138,9 @@ function clearContent()
 									<td id="setting" >Settings</td>
 									<td>&nbsp;</td>
 								</tr>
-								<tr>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+									<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td align="center"><input type="button" name="button" id="button3" value="Category" onClick="submitFunction(6)" /></td>
 									
 								</tr>
 							</table>
@@ -162,13 +157,20 @@ function clearContent()
 				<td>
 					<table id="table3">
 						<tr>
-							<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
+							<td id="#td6">&nbsp;&nbsp;
 								<table align="center" cellspacing="4" cellpadding="10">
 									<tr>
-										<td colspan="3" id="font1"><input type="label" id="font1" 
+										<td colspan="2"><input type="label" id="font1" 
 											name="label" value="Task List" readonly />
 										<font size="2"><b>Completion Date:</b>${date}</font> 
-									&nbsp;&nbsp;	<font size="2"><b>Time:</b>${time}</font></td>
+									&nbsp;&nbsp;	<font size="2"><b>Time:</b>${time}</font>	&nbsp;&nbsp;<font size="2"><b>Reminder:</b><font color="red">${result}</font></font>
+								</td>
+								<td>	<form action="../Tasks/${taskId}/remind" method="POST">
+									<input type="hidden" id="mode" name="mode" value="Remind"/>
+																	<input type="hidden" id="taskId" name="taskId" value="${taskId}"/>
+															<input type="image" src="../images/Remindme.png" border="0" alt="Submit" height="30px" width="50px" title="Remind me"/>
+									</form>
+									</td>
 										
 									</tr>
 									<tr>
@@ -177,10 +179,10 @@ function clearContent()
 												<tr>
 													<td>
 														<div style="overflow: scroll; height: 135px; width: 100%; overflow: auto">
-															<table id="tableView3" align="center" cellspacing="0"
+															<table id="tableView1" align="center" cellspacing="0"
 																cellpadding="7" width="300" bgcolor="#abecef">
 																<tr>
-																	<th colspan="5" bgcolor="#099aa2">${taskName}</th>
+																	<th colspan="5" bgcolor="#477d9a">${taskName}</th>
 																</tr>
 																<c:forEach items="${ listOfItem }" var="item">
 																	<tr>
@@ -193,22 +195,21 @@ function clearContent()
 																		
 																		</td>
 																		<td>
-																		<form action="../Task/${item.taskId}/Item/edit" method="POST">
+																		<form action="../Tasks/${item.taskId}/Item/edit" method="POST">
 																		
-																		<input type="hidden" name="taskId" value="${item.taskId}" />
-																		<input type="hidden" name="taskname" value="${taskName}" />
-																		<input type="hidden" name="check1" value="${item.subtaskID}" />
+																		<input type="hidden" name="mode" value="Edit" />
+																	
+																		<input type="hidden" name="subId" value="${item.subtaskID}" />
 																		<input type="submit" id="addbtn" width="10" name="button" value="Edit" onClick="submitFunction(1)"/>
 																		
 																		
 																		</form>
 																		</td>
 																		<td>
-																		<form id="myform" name="myView1" action="../Task/${item.taskId}" method="POST">
+																		<form id="myform" name="myView1" action="../Tasks/${item.taskId}" method="POST">
 																		
-																		<input type="hidden" name="taskId" value="${item.taskId}" />
-																			<input type="hidden" name="taskname" value="${taskName}" />
-																		<input type="hidden" name="check1" value="${item.subtaskID}" />
+																		<input type="hidden" name="mode" value="Complete" />
+																		<input type="hidden" name="subId" value="${item.subtaskID}" />
 																		<input type="submit" id="addbtn" name="button" value="Complete" onfocus="clearContent()"/>
 																		
 																		</form>
@@ -241,11 +242,11 @@ function clearContent()
 																	<tr>
 																		<td><s>${ item1.name }</s></td>
 																		<td>
-																			<form id="myform" name="myView1" action="../Task/${item1.taskId}" method="POST">
-																				<input type="hidden" name="taskId" value="${item1.taskId}" />
-																				<input type="hidden" name="subtaskId"
+																			<form id="myform" name="myView1" action="../Tasks/${item1.taskId}" method="POST">
+																			
+																				<input type="hidden" name="subId"
 																					value="${item1.subtaskID}" />
-																						<input type="hidden" name="taskname" value="${taskName}" />
+																						<input type="hidden" name="mode" value="AddToItem" />
 																				<%-- 	<input type="hidden" name="taskId" value="${item1.taskId}"/></td> --%>
 																				<input type="submit" id="addbtn" width="2"
 																					height="2" name="button" value="+">
@@ -265,15 +266,13 @@ function clearContent()
 									</tr>
 
 									<tr>
-									<form action="../Task/${taskId}" method="POST">
-									<input type="hidden" name="taskname" value="${taskName}" />
-									<input type="hidden" name="taskId" value="${taskId}" />
-										<input type="hidden" id="Btn3" name="button" value="Done."/>
+									<form action="../Tasks/${taskId}" method="POST">
+								
+								
+										<input type="hidden" id="mode" name="mode" value="SaveItem"/>
 										<td align="center" colspan="2">
 									<input type="text" name="itemname" size="26" placeholder="New Item" onfocus="clearContent()" required="required"/>
-									<input type="submit"
-											id="removeBTN" name="button1" value="Add" 
-											onfocus="clearContent()" />
+									<input type="submit" id="removeBTN" name="button1" value="Add" onfocus="clearContent()" />
 											</td>
 											</form>
 									</tr>

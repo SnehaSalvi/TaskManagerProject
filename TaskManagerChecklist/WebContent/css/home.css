@@ -59,7 +59,27 @@ body
     font-size: 11px;
     border: 0;
 }
-#mode
+#close_button
+{
+	height: 25px;
+	width: 25px;
+	background:url("images/Close-icon.png")
+	   border: 0;
+}
+#button3 
+{
+    height: 40px;
+    width: 80px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    font-family:sans-serif;
+    font-size: 14px;
+   
+   background-color:#477d9a;
+   color:white;
+    border: 0;
+}
+#button33
 {
     height: 25px;
     width: 65px;

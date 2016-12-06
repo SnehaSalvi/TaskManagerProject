@@ -16,34 +16,39 @@
 <script type="text/javascript">
 function submitFunction(i) 
 {
-	   if (i==1) 
-		   {
-		    
-		   document.myView.action="../../../Task/${taskId}";
-		   document.getElementById('Btn').value = "Update";
+	if (i==1)  {
+	    
+		   document.myView.action="../../../Tasks/${taskId}";
+		   document.getElementById('mode').value = "Update";
 		   }
-	   if (i==3)  {
+	 if (i==3)  {
 		    
 		   document.myView.action="../../../Tasks";
-		   document.getElementById('Btn').value = "Taskview";
+		   document.getElementById('mode').value = "Taskview";
 		   }
 	   if (i==4)  {
 		    
-		   document.myView.action="../../../Item/new";
-		   document.getElementById('Btn').value = "ItemNew";
+		   document.myView.action="../../../Items/new";
+		   document.getElementById('mode').value = "ItemNew";
 		   }
 	   if (i==5)  {
 		    
 		   document.myView.action="../../../Tasks";
-		   document.getElementById('Btn').value = "TasksList";
+		   document.getElementById('mode').value = "TasksList";
 		   }
+	   if (i==6)  {
+		    
+		   document.myView.action="../../../Category/new";
+		   document.getElementById('mode').value = "CategoryNew";
+		   }
+	   document.myView.submit()
 	   document.myView.submit()
 	   }
 </script>
 </head>
 <body>
 <form name="myView" action="" method="POST">
-<input type="hidden" id="Btn" name="button" value=""/>
+<input type="hidden" id="mode" name="mode" value=""/>
 <input type="hidden" name="subId" id="subId" value="${subId}" />
 <input type="hidden" name="taskId" id="subId" value="${taskId}" />
 	<table id="table1">
@@ -57,7 +62,7 @@ function submitFunction(i)
 				Task Manager
 			</td>
 			<td id="td4" align="center">
-				<a href="../../../Home.jsp"><img id="list1" src="../../../images/HomePic.png"/></a>
+				<a href="../../../Home"><img id="list1" src="../../../images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
@@ -95,8 +100,8 @@ function submitFunction(i)
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td align="center"><input type="button" name="button" id="button3" value="Category" onClick="submitFunction(6)" /></td>
 									
 								</tr>
 							</table>

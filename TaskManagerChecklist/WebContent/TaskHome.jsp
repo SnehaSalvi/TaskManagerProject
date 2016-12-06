@@ -26,20 +26,25 @@ function button1()
 	   if (i==3)  {
 		    
 		   document.myView.action="Tasks";
-		   document.getElementById('Btn').value = "Taskview";
+		   document.getElementById('mode').value = "Taskview";
 		   }
 	   if (i==4)  {
 		    
-		   document.myView.action="Item/new";
-		   document.getElementById('Btn').value = "ItemNew";
+		   document.myView.action="Items/new";
+		   document.getElementById('mode').value = "ItemNew";
 		   }
 	   if (i==5)  {
 		    
 		   document.myView.action="Tasks";
-		   document.getElementById('Btn').value = "TasksList";
+		   document.getElementById('mode').value = "TasksList";
+		   }
+	   if (i==6)  {
+		    
+		   document.myView.action="Category/new";
+		   document.getElementById('mode').value = "CategoryNew";
 		   }
 	   document.myView.submit()
-	   }
+}
 
 </script>
 </head>
@@ -55,7 +60,7 @@ function button1()
 				Task Manager
 			</td>
 			<td id="td4" align="center">
-				<a href="Home.jsp"><img id="list1" src="images/HomePic.png"/></a>
+				<a href="Home"><img id="list1" src="images/HomePic.png"/></a>
 			</td>
 			<td id="td3" align="center">
 				<input type="button" name="remind" id="button1" value="Remind Me"/>
@@ -70,7 +75,7 @@ function button1()
 		<tr>
 			<td>
 			<form name="myView" action="" method="POST">
-				<input type="hidden" id="Btn" name="button" value=""/>
+				<input type="hidden" id="mode" name="mode" value=""/>
 				<table id="table2" border="1">
 					<tr>
 						<td id="#td5" align="center">
@@ -94,9 +99,9 @@ function button1()
 									<td id="setting" >Settings</td>
 									<td>&nbsp;</td>
 								</tr>
-								<tr>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td id="menu"><ul><li type="disc"><a href="http://localhost:8080/TaskManagerChecklist/Category/new"><font color="white">Category</font></a></li></ul></td>
+									<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td align="center"><input type="button" name="button" id="button3" value="Category" onClick="submitFunction(6)" /></td>
 									
 								</tr>
 							</table>
@@ -111,10 +116,10 @@ function button1()
 				</form>
 			</td>
 			<td>
-				<table id="table3">
+				<table id="table3" align="top">
 					<tr>
-						<td id="#td6">&nbsp;&nbsp;&nbsp;&nbsp;
-						<table align="center" cellspacing="4" cellpadding="10">
+						<td id="#td6">
+						<table align="center">
 								<tr>
 									<td colspan="2">
 										<input type="label" id="font1" name="label" value="Task List" readonly/>
@@ -136,17 +141,19 @@ function button1()
 												${task.name }
 												 </td>
 											<td  align="center" bgcolor="#abecef" >
-											<form id="myform" action="Task/${task.taskId}" method="POST">		
+											<form id="myform" action="Tasks/${task.taskId}" method="POST">		
 												
-											<input type="hidden" name="taskId" value="${task.taskId}"/>
+											<input type="hidden" name="mode" value="AddItem"/>
 											<input type="submit" id="editBTN" name="button" value="Add Item">
 											</form>
 											</td>
 											<td  align="center" bgcolor="#abecef">
-												<form id="myform1" action="Tasks" method="POST">
-												<input type="hidden" name="taskId" value="${task.taskId}"/>
-													<input type="hidden" name="button" value="CompleteTask"/>
+												<form name="submit" id="myform1" action="Tasks" method="POST">
+											
+													<input type="hidden" name="mode" value="CompleteTask${task.taskId}"/>
 													<input type="submit" id="editBTN" name="button1" value="Complete">
+													
+												
 												</form>
 											</td>
 											
@@ -154,6 +161,7 @@ function button1()
 											</c:forEach> 
 											<tr>
 											<td colspan="5" align="center">
+											
 											<font color="red"><h5>${message}</h5></font>
 											</td>
 											</tr>
@@ -164,8 +172,8 @@ function button1()
 								</tr>
 								
 								</table>
-								<form action="Task/new" method="POST">
-								<input type="hidden" name="button" value="createTask"/>
+								<form action="Tasks/new" method="POST">
+								<input type="hidden" name="mode" value="createTask"/>
 							<table align="right">
 							<tr><td>&nbsp;</td>
 											<td align="left">

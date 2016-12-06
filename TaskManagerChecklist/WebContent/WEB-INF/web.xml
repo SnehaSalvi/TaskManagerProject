@@ -3,7 +3,7 @@
   <display-name>TaskManagerChecklist</display-name>
   <welcome-file-list>
   
-    <welcome-file>Home.jsp</welcome-file>
+    <welcome-file>Home</welcome-file>
    
   </welcome-file-list>
   <servlet>
@@ -14,13 +14,14 @@
     <servlet-name>Hello</servlet-name>
     <url-pattern>/Hello</url-pattern>
   </servlet-mapping>
-  <servlet>
+ <servlet>
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>HomeServlet</servlet-class>
+     <load-on-startup>1</load-on-startup>  
   </servlet>
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/HomeServlet</url-pattern>
+    <url-pattern>/Home</url-pattern>
   </servlet-mapping>
  <!--  <servlet>
     <servlet-name>TaskServlet</servlet-name>
